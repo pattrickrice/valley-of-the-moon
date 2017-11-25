@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/valley.dir/main.cpp.o CMakeFiles/valley.dir/menu.cpp.o CMakeFiles/valley.dir/utilities.cpp.o  -o valley.exe -Wl,--out-implib,libvalley.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
