@@ -1,14 +1,27 @@
-//
-// Created by Patrick on 11/25/2017.
-//
+/*********************************************************************
+ * Author: Patrick Rice
+ * Date: 11/25/2017
+ * Description: Header file for the map class
+*********************************************************************/
+#ifndef MAP_HPP
+#define MAP_HPP
 
-#ifndef VALLEY_MAP_HPP
-#define VALLEY_MAP_HPP
+#include <iostream>
+using std::string;
 
+class Map {
+private:
+    int **board;
+    int boardSizeX;
+    int boardSizeY;
+    bool importBoard(string filename);
 
-class map {
+public:
+    Map();
+    Map(string filename);
+    ~Map();
 
 };
 
 
-#endif //VALLEY_MAP_HPP
+#endif
