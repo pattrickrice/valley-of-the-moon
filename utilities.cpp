@@ -350,7 +350,6 @@ string getAddress() {
         }
     } while (!validInput);
     return address;
-
 };
 
 /*********************************************************************
