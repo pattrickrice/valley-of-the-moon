@@ -159,7 +159,7 @@ string getString(unsigned int min, unsigned int max) {
  * @input is the string to be formatted
  * @width is the width of the box the string will be inside
  ********************************************************************/
-void printBoxLine(string input, int width) {
+void printLeftAligned(string input, int width) {
 
     //get string length
     int stringLength = static_cast<int>(input.length());
@@ -186,61 +186,7 @@ void printBoxLine(string input, int width) {
  * @width is the width of the box the string will be inside
  ********************************************************************/
 void printCenterTitle(string input, int width) {
-    string output;
-    int stringLength = input.length();
-    bool stringEven = isEven(static_cast<int>(stringLength));
-    bool widthEven = isEven(width);
-    int stringHalf = stringLength / 2;
-    int widthHalf = width / 2;
-
-    //left border
-    output = "+";
-
-    // Number of dashes will depend on the number of characters
-    // in the string and the width of the box. There are four
-    // possible cases.
-    if (stringEven) {
-        if (widthEven) {
-
-            for (int i = 1; i < widthHalf - stringHalf; ++i) {
-                output += "-";
-            }
-            output += " " + input + " ";
-            for (int i = 1; i < widthHalf - stringHalf - 1; ++i) {
-                output += "-";
-            }
-        } else {
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "-";
-            }
-            output += " " + input + " ";
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "-";
-            }
-        }
-    } else {
-        if (widthEven) {
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "-";
-            }
-            output += " " + input + " ";
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "-";
-            }
-        } else {
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "-";
-            }
-            output += " " + input + " ";
-            for (int i = 1; i < widthHalf - stringHalf; ++i) {
-                output += "-";
-            }
-        }
-    }
-
-    //right border
-    output += "+\n";
-    cout << output;
+    printCenteredBox(input, width, '-');
 };
 
 /*********************************************************************
@@ -251,61 +197,18 @@ void printCenterTitle(string input, int width) {
  * @width is the width of the box the string will be inside
  ********************************************************************/
 void printBoldCenterTitle(string input, int width) {
-    string output;
-    int stringLength = input.length();
-    bool stringEven = isEven(static_cast<int>(stringLength));
-    bool widthEven = isEven(width);
-    int stringHalf = stringLength / 2;
-    int widthHalf = width / 2;
+     printCenteredBox(input, width, '=');
+};
 
-    //left border
-    output = "+";
-
-    // Number of dashes will depend on the number of characters
-    // in the string and the width of the box. There are four
-    // possible cases.
-    if (stringEven) {
-        if (widthEven) {
-
-            for (int i = 0; i < widthHalf - stringHalf; ++i) {
-                output += "=";
-            }
-            output += " " + input + " ";
-            for (int i = 0; i < widthHalf - stringHalf - 1; ++i) {
-                output += "=";
-            }
-        } else {
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "=";
-            }
-            output += " " + input + " ";
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "=";
-            }
-        }
-    } else {
-        if (widthEven) {
-            for (int i = 1; i < widthHalf - stringHalf; ++i) {
-                output += "=";
-            }
-            output += " " + input + " ";
-            for (int i = 1; i < widthHalf - stringHalf; ++i) {
-                output += "=";
-            }
-        } else {
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
-                output += "=";
-            }
-            output += " " + input + " ";
-            for (int i = 1; i < widthHalf - stringHalf; ++i) {
-                output += "=";
-            }
-        }
-    }
-
-    //right border
-    output += "+\n";
-    cout << output;
+/*********************************************************************
+ * Takes a string and formats the output to have the string in the
+ * center of the line with a " " border around it.
+ *
+ * @input is the string to be formatted
+ * @width is the width of the box the string will be inside
+ ********************************************************************/
+void printCenteredString(string input, int width) {
+    printCenteredBox(input, width, ' ');
 };
 
 /*********************************************************************
@@ -449,3 +352,69 @@ string getAddress() {
     return address;
 
 };
+
+/*********************************************************************
+ * Takes a string and formats the output to have the string in the
+ * center of the line with a character surrounding.
+ *
+ * @input is the string to be formatted
+ * @width is the width of the box the string will be inside
+ * @filler is the character filling the line.
+ ********************************************************************/
+void printCenteredBox(string input, int width, char filler){
+    string output;
+    unsigned long stringLength = input.length();
+    bool stringEven = isEven(static_cast<int>(stringLength));
+    bool widthEven = isEven(width);
+    int stringHalf = static_cast<int>(stringLength / 2);
+    int widthHalf = width / 2;
+
+    //left border
+    output = "+";
+
+    // Number of dashes will depend on the number of characters
+    // in the string and the width of the box. There are four
+    // possible cases.
+    if (stringEven) {
+        if (widthEven) {
+
+            for (int i = 1; i < widthHalf - stringHalf; ++i) {
+                output += filler;
+            }
+            output += " " + input + " ";
+            for (int i = 1; i < widthHalf - stringHalf - 1; ++i) {
+                output += filler;
+            }
+        } else {
+            for (int i = 2; i < widthHalf - stringHalf; ++i) {
+                output += filler;
+            }
+            output += " " + input + " ";
+            for (int i = 2; i < widthHalf - stringHalf; ++i) {
+                output += filler;
+            }
+        }
+    } else {
+        if (widthEven) {
+            for (int i = 2; i < widthHalf - stringHalf; ++i) {
+                output += filler;
+            }
+            output += " " + input + " ";
+            for (int i = 2; i < widthHalf - stringHalf; ++i) {
+                output += filler;
+            }
+        } else {
+            for (int i = 2; i < widthHalf - stringHalf; ++i) {
+                output += filler;
+            }
+            output += " " + input + " ";
+            for (int i = 1; i < widthHalf - stringHalf; ++i) {
+                output += filler;
+            }
+        }
+    }
+
+    //right border
+    output += "+\n";
+    cout << output;
+}

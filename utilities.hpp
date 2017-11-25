@@ -18,9 +18,11 @@ string getString(unsigned int min, unsigned int max);
 
 double getDouble(double min, double max);
 
-void printBoxLine(string, int);
+void printLeftAligned(string, int);
 
 void printCenterTitle(string, int);
+
+void printCenteredString(string, int);
 
 void printBoldCenterTitle(string input, int width);
 
@@ -37,5 +39,7 @@ void printLeftAndRightAlignedStrings(string prefix, string suffix, int width);
 string getMultiWordString(unsigned int, unsigned int);
 
 string getAddress();
+
+void printCenteredBox(string input, int width, char filler);
 
 #endif
