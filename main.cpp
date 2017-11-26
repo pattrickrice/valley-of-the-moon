@@ -4,7 +4,9 @@
  * Date: 11/24/2017
  * Description:
 *********************************************************************/
+
 #include "menu.hpp"
+#include "map.hpp"
 #include "utilities.hpp"
 
 using std::cout;
@@ -25,7 +27,8 @@ int main() {
     printCenteredString("A text-based adventure game", width);
     printBorder(width);
 
-
+    Map map1("houseMap.txt");
+    char **map = map1.getBoard();
 
     return 0;
 }

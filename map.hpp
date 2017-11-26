@@ -11,7 +11,7 @@ using std::string;
 
 class Map {
 private:
-    int **board;
+    char **board;
     int boardSizeX;
     int boardSizeY;
     bool importBoard(string filename);
@@ -20,8 +20,10 @@ public:
     Map();
     Map(string filename);
     ~Map();
-
-};
+    char **getBoard();
+    int getBoardSizeX();
+    int getBoardSizeY();
+    };
 
 
 #endif
