@@ -11,6 +11,7 @@
 Space::Space() {
     this->spaceType = EMPTY;
     this->permiable = false;
+    this->value = ' ';
     setTop(nullptr);
     setLeft(nullptr);
     setBottom(nullptr);
@@ -20,20 +21,22 @@ Space::Space() {
 /*********************************************************************
  * Constructor. Should not be called
  * @param spaceType is the category of space
- * @param permiable whether or not a character can move to the space/
+ * @param permeable whether or not a character can move to the space/
  * @param top is the top space pointer.
  * @param left is the left space pointer.
  * @param right is the right space pointer.
  * @param bottom is the bottom space pointer.
  ********************************************************************/
 Space::Space(SpaceType spaceType,
-             bool permiable,
+             bool permeable,
+             char value,
              Space *top,
              Space *left,
              Space *right,
              Space *bottom) {
     this->spaceType = spaceType;
-    this->permiable = permiable;
+    this->permiable = permeable;
+    this->value = value;
     setTop(top);
     setLeft(left);
     setBottom(right);
@@ -94,6 +97,14 @@ void Space::setBottom(Space *bottom) {
 }
 
 /*********************************************************************
+ * Sets the character value which is printed
+ * @param value is the character
+ ********************************************************************/
+void Space::setValue(char value) {
+    this->value = value;
+}
+
+/*********************************************************************
  * Returns pointer to the top space
  ********************************************************************/
 Space *Space::getTop() {
@@ -119,6 +130,13 @@ Space *Space::getLeft() {
  ********************************************************************/
 Space *Space::getBottom() {
     return bottom;
+}
+
+/*********************************************************************
+ * Returns pointer to the bottom space
+ ********************************************************************/
+char Space::getValue() {
+    return value;
 }
 
 /*********************************************************************

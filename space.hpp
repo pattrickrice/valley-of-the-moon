@@ -7,23 +7,26 @@
 #ifndef SPACE_HPP
 #define SPACE_HPP
 
+enum SpaceType {
+    EMPTY, WALL, DOOR, KEY,
+};
+
 class Space {
     Space *top;
     Space *right;
     Space *left;
     Space *bottom;
 
-    enum SpaceType {
-        EMPTY, WALL, DOOR, KEY,
-    };
     SpaceType spaceType;
     bool permiable;
+    char value;
 
 public:
     Space();
 
     Space(SpaceType,
           bool,
+          char,
           Space *,
           Space *,
           Space *,
@@ -43,6 +46,8 @@ public:
 
     void setBottom(Space *);
 
+    void setValue(char);
+
     Space *getTop();
 
     Space *getRight();
@@ -50,6 +55,8 @@ public:
     Space *getLeft();
 
     Space *getBottom();
+
+    char getValue();
     
     ~Space();
 };

@@ -6,24 +6,34 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+#include "space.hpp"
 #include <iostream>
+
 using std::string;
 
 class Map {
 private:
-    char **board;
+    Space *boardHead;
     int boardSizeX;
     int boardSizeY;
+
     bool importBoard(string filename);
 
 public:
     Map();
+
     Map(string filename);
-    ~Map();
-    char **getBoard();
+
+    Space *getBoardHead();
+
     int getBoardSizeX();
+
     int getBoardSizeY();
-    };
+
+    void printMap();
+
+    ~Map();
+};
 
 
 #endif

@@ -18,7 +18,7 @@ private:
 public:
     Character();
 
-    Character::Character(int startingX, int startingY);
+    Character(int startingX, int startingY);
 
     bool makeMove();
 

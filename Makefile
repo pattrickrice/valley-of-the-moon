@@ -1,7 +1,7 @@
 OJBS = main.o  menu.o utilities.o map.o character.o space.o
 CC = g++
 CFLAGS = -c -std=c++0x -Wall
-LFLAGS = -std=c++0x -Wall -o
+LFLAGS = -g -std=c++0x -Wall -o
 
 game.o: $(OJBS)
 	@echo '[BUILDING] ... game'

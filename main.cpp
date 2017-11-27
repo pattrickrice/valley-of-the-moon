@@ -28,7 +28,9 @@ int main() {
     printBorder(width);
 
     Map map1("houseMap.txt");
-    char **map = map1.getBoard();
+    map1.printMap();
+    Space *map = map1.getBoardHead();
+
 
     return 0;
 }
