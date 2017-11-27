@@ -1,9 +1,10 @@
-//
-// Created by Patrick on 11/26/2017.
-//
-
-#ifndef VALLEY_EMPTYSPACE_HPP
-#define VALLEY_EMPTYSPACE_HPP
+/*********************************************************************
+ * Author: Patrick Rice
+ * Date: 11/25/2017
+ * Description: Header file for the empty space class
+*********************************************************************/
+#ifndef EMPTYSPACE_HPP
+#define EMPTYSPACE_HPP
 
 
 class emptySpace {
@@ -11,4 +12,4 @@ class emptySpace {
 };
 
 
-#endif //VALLEY_EMPTYSPACE_HPP
+#endif

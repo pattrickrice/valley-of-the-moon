@@ -1,4 +1,4 @@
-OJBS = main.o  menu.o utilities.o map.o
+OJBS = main.o  menu.o utilities.o map.o character.o space.o
 CC = g++
 CFLAGS = -c -std=c++0x -Wall
 LFLAGS = -std=c++0x -Wall -o
@@ -23,6 +23,14 @@ utilities.o: utilities.cpp
 map.o: map.cpp
 	@echo '[BUILDING] ... map'
 	@$(CC) $(CFLAGS) map.cpp
+
+character.o: character.cpp
+	@echo '[BUILDING] ... character'
+	@$(CC) $(CFLAGS) character.cpp
+
+space.o: space.cpp
+	@echo '[BUILDING] ... space'
+	@$(CC) $(CFLAGS) space.cpp
 
 clean:
 	@echo '[CLEANING] ... removing .o files'

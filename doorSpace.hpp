@@ -1,14 +1,14 @@
-//
-// Created by Patrick on 11/26/2017.
-//
+/*********************************************************************
+ * Author: Patrick Rice
+ * Date: 11/26/2017
+ * Description: Header file for the DoorSpace class
+*********************************************************************/
+#ifndef DOORSPACE_HPP
+#define DOORSPACE_HPP
 
-#ifndef VALLEY_DOORSPACE_HPP
-#define VALLEY_DOORSPACE_HPP
-
-
-class doorSpace {
+class DoorSpace {
 
 };
 
 
-#endif //VALLEY_DOORSPACE_HPP
+#endif

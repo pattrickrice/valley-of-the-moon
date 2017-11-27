@@ -1,14 +1,15 @@
-//
-// Created by Patrick on 11/26/2017.
-//
+/*********************************************************************
+ * Author: Patrick Rice
+ * Date: 11/25/2017
+ * Description: Header file for the space class
+*********************************************************************/
 
-#ifndef VALLEY_WALLSPACE_HPP
-#define VALLEY_WALLSPACE_HPP
+#ifndef WALLSPACE_HPP
+#define WALLSPACE_HPP
 
-
-class wallSpace {
+class WallSpace {
 
 };
 
 
-#endif //VALLEY_WALLSPACE_HPP
+#endif

@@ -1,14 +1,16 @@
-//
-// Created by Patrick on 11/26/2017.
-//
+/*********************************************************************
+ * Author: Patrick Rice
+ * Date: 11/26/2017
+ * Description: Header file for the key space class
+*********************************************************************/
 
-#ifndef VALLEY_KEYSPACE_HPP
-#define VALLEY_KEYSPACE_HPP
+#ifndef KEYSPACE_HPP
+#define KEYSPACE_HPP
 
 
-class keySpace {
+class KeySpace {
 
 };
 
 
-#endif //VALLEY_KEYSPACE_HPP
+#endif
