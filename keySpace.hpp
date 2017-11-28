@@ -9,13 +9,16 @@
 
 #include "space.hpp"
 
-class KeySpace : public Space{
+
+class KeySpace : public Space {
+public:
     KeySpace();
-    KeySpace::KeySpace(char value,
-                         Space *top,
-                         Space *left,
-                         Space *right,
-                         Space *bottom);
+
+    KeySpace(char value,
+             Space *top,
+             Space *left,
+             Space *right,
+             Space *bottom);
 };
 
 

@@ -4,6 +4,10 @@
  * Description: Implementation of the map class
 *********************************************************************/
 #include "map.hpp"
+#include "emptySpace.hpp"
+#include "wallSpace.hpp"
+#include "keySpace.hpp"
+#include "doorSpace.hpp"
 #include <fstream>
 
 using std::fstream;
@@ -110,7 +114,7 @@ bool Map::importBoard(string fileName) {
                         i++;
                     }
                 } else if (width == 0) {
-                    while (i < height -1) {
+                    while (i < height - 1) {
                         // get to y-axis location
                         current = current->getBottom();
                         if (!firstRow && i < height - 1) {
@@ -138,29 +142,26 @@ bool Map::importBoard(string fileName) {
             // assign value
             // first tile of map
             if (boardHead != nullptr && width != 0) {
-                current->setRight(new Space(EMPTY,
-                                            true,
-                                            readChar,
-                                            tempUp,
-                                            current,
-                                            nullptr,
-                                            nullptr));
+                current->setRight(this->setSpace(
+                        readChar,
+                        tempUp,
+                        current,
+                        nullptr,
+                        nullptr));
             } else if (boardHead != nullptr) {
-                current->setBottom(new Space(EMPTY,
-                                             true,
-                                             readChar,
-                                             nullptr,
-                                             nullptr,
-                                             nullptr,
-                                             nullptr));
+                current->setBottom(this->setSpace(
+                        readChar,
+                        nullptr,
+                        nullptr,
+                        nullptr,
+                        nullptr));
             } else {
-                current = new Space(EMPTY,
-                                    true,
-                                    readChar,
-                                    nullptr,
-                                    nullptr,
-                                    nullptr,
-                                    nullptr);
+                current = this->setSpace(
+                        readChar,
+                        nullptr,
+                        nullptr,
+                        nullptr,
+                        nullptr);
                 boardHead = current;
             }
 
@@ -194,11 +195,11 @@ bool Map::importBoard(string fileName) {
     return true;
 }
 
-void Map::printMap(){
+void Map::printMap() {
     string print;
     if (boardHead != nullptr) {
-        Space *current = boardHead;
-        Space *nextRow = nullptr;
+        auto current = boardHead;
+        auto nextRow = boardHead;
 
         // there is a another row
         if (boardHead->getBottom() != nullptr) {
@@ -215,12 +216,72 @@ void Map::printMap(){
 
             if (nextRow != nullptr) {
                 current = nextRow;
-                nextRow = nextRow->getBottom();
+                nextRow = current->getBottom();
             }
         } while (current != nullptr);
 
         cout << print << endl;
     }
+}
+
+/*********************************************************************
+ * Returns a pointer to a space character.
+ * @param value is the character value
+ * @param top is the top space pointer.
+ * @param left is the left space pointer.
+ * @param right is the right space pointer.
+ * @param bottom is the bottom space pointer.
+*********************************************************************/
+Space *Map::setSpace(char value,
+                     Space *top,
+                     Space *left,
+                     Space *right,
+                     Space *bottom) {
+    Space *newTile;
+
+    // create space based on value
+    switch (value) {
+        case ' ':
+            newTile = new EmptySpace(value,
+                                     top,
+                                     left,
+                                     right,
+                                     bottom);
+            break;
+        case '-':
+        case '|':
+        case '=':
+        case '+':
+            newTile = new WallSpace(value,
+                                     top,
+                                     left,
+                                     right,
+                                     bottom);
+            break;
+        case 'K':
+            newTile = new KeySpace(value,
+                                     top,
+                                     left,
+                                     right,
+                                     bottom);
+            break;
+        case 'D':
+            newTile = new DoorSpace(value,
+                                   top,
+                                   left,
+                                   right,
+                                   bottom);
+            break;
+
+        default:
+            newTile = new EmptySpace(value,
+                                     top,
+                                     left,
+                                     right,
+                                     bottom);
+    }
+
+    return newTile;
 }
 
 
@@ -250,6 +311,13 @@ int Map::getBoardSizeY() {
 *********************************************************************/
 Map::~Map() {
     if (boardHead != nullptr) {
+
+        // we need to do proper delete calls
+        EmptySpace *emptyGarbage;
+        WallSpace *wallGarbage;
+        KeySpace *keyGarbage;
+        DoorSpace *doorGarbage;
+
         Space *garbage = boardHead;
         Space *current = boardHead;
         Space *nextRowGarbage = nullptr;
@@ -264,9 +332,32 @@ Map::~Map() {
             while (garbage != nullptr) {
                 // x-axis
                 current = current->getRight();
+                SpaceType space = garbage->getSpaceType();
 
                 // get rid of the pointers
-                delete garbage;
+                // figure out which type of space it is and
+                // properly delete
+                switch (space) {
+                    case EMPTY:
+                        emptyGarbage = static_cast<EmptySpace *>(garbage);
+                        delete emptyGarbage;
+                        break;
+                    case WALL:
+                        wallGarbage = static_cast<WallSpace *>(garbage);
+                        delete wallGarbage;
+                        break;
+                    case KEY:
+                        keyGarbage = static_cast<KeySpace *>(garbage);
+                        delete keyGarbage;
+                        break;
+                    case DOOR:
+                        doorGarbage = static_cast<DoorSpace *>(garbage);
+                        delete doorGarbage;
+                        break;
+                    default:
+                        delete garbage;
+                }
+
                 garbage = current;
             }
 

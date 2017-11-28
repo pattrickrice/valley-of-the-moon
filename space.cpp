@@ -22,6 +22,7 @@ Space::Space() {
  * Constructor.
  * @param spaceType is the category of space
  * @param permeable whether or not a character can move to the space/
+ * @param value is the character value
  * @param top is the top space pointer.
  * @param left is the left space pointer.
  * @param right is the right space pointer.

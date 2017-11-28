@@ -8,14 +8,16 @@
 
 #include "space.hpp"
 
-class DoorSpace : Space{
+class DoorSpace : public Space {
 public:
     DoorSpace();
-    DoorSpace::DoorSpace(char value,
-                         Space *top,
-                         Space *left,
-                         Space *right,
-                         Space *bottom);
+
+    DoorSpace(char value,
+
+              Space * top,
+              Space * left,
+              Space * right,
+              Space * bottom);
 };
 
 

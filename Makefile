@@ -1,4 +1,5 @@
-OJBS = main.o  menu.o utilities.o map.o character.o space.o
+OJBS = main.o  menu.o utilities.o map.o character.o space.o \
+emptySpace.o wallSpace.o keySpace.o doorSpace.o
 CC = g++
 CFLAGS = -c -std=c++0x -Wall
 LFLAGS = -g -std=c++0x -Wall -o
@@ -31,6 +32,22 @@ character.o: character.cpp
 space.o: space.cpp
 	@echo '[BUILDING] ... space'
 	@$(CC) $(CFLAGS) space.cpp
+
+emptySpace.o: emptySpace.cpp
+	@echo '[BUILDING] ... emptySpace'
+	@$(CC) $(CFLAGS) emptySpace.cpp
+
+wallSpace.o: wallSpace.cpp
+	@echo '[BUILDING] ... wallSpace'
+	@$(CC) $(CFLAGS) wallSpace.cpp
+
+keySpace.o: keySpace.cpp
+	@echo '[BUILDING] ... keySpace'
+	@$(CC) $(CFLAGS) keySpace.cpp
+
+doorSpace.o: doorSpace.cpp
+	@echo '[BUILDING] ... doorSpace'
+	@$(CC) $(CFLAGS) doorSpace.cpp
 
 clean:
 	@echo '[CLEANING] ... removing .o files'
