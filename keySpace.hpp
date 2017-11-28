@@ -7,9 +7,17 @@
 #ifndef KEYSPACE_HPP
 #define KEYSPACE_HPP
 
+#include "space.hpp"
 
-class KeySpace {
+class KeySpace : public Space {
+public:
+    KeySpace();
 
+    KeySpace(char value,
+             Space *top,
+             Space *left,
+             Space *right,
+             Space *bottom);
 };
 
 

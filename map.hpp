@@ -30,6 +30,12 @@ public:
 
     int getBoardSizeY();
 
+    Space *setSpace(char,
+                    Space *,
+                    Space *,
+                    Space *,
+                    Space *);
+
     void printMap();
 
     ~Map();

@@ -27,5 +27,6 @@ EmptySpace::EmptySpace(char value,
                                               left,
                                               right,
                                               bottom) {
+    this->money = 10000000;
 }
 
