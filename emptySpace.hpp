@@ -6,9 +6,19 @@
 #ifndef EMPTYSPACE_HPP
 #define EMPTYSPACE_HPP
 
+#include "space.hpp"
 
-class emptySpace {
+class EmptySpace : public Space {
+private:
+    int money;
+public:
+    EmptySpace();
 
+    EmptySpace(char value,
+               Space *top,
+               Space *left,
+               Space *right,
+               Space *bottom);
 };
 
 
