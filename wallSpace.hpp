@@ -7,8 +7,17 @@
 #ifndef WALLSPACE_HPP
 #define WALLSPACE_HPP
 
-class WallSpace {
+#include "space.hpp"
 
+class WallSpace : public Space {
+public:
+    WallSpace();
+
+    WallSpace(char value,
+              Space *top,
+              Space *left,
+              Space *right,
+              Space *bottom);
 };
 
 

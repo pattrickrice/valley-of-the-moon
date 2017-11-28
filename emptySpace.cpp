@@ -5,9 +5,7 @@
 *********************************************************************/
 #include "emptySpace.hpp"
 
-EmptySpace::EmptySpace() : Space() {
-
-}
+EmptySpace::EmptySpace() = default;
 
 /*********************************************************************
  * Constructor.
@@ -18,19 +16,16 @@ EmptySpace::EmptySpace() : Space() {
  * @param right is the right space pointer.
  * @param bottom is the bottom space pointer.
  ********************************************************************/
-EmptySpace::EmptySpace(SpaceType spaceType,
-                       bool permeable,
-                       char value,
+EmptySpace::EmptySpace(char value,
                        Space *top,
                        Space *left,
                        Space *right,
-                       Space *bottom) : Space(spaceType,
-                                              permeable,
+                       Space *bottom) : Space(EMPTY,
+                                              true,
                                               value,
                                               top,
                                               left,
                                               right,
                                               bottom) {
-
 }
 

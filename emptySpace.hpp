@@ -12,13 +12,11 @@ class EmptySpace : public Space {
 public:
     EmptySpace();
 
-    EmptySpace::EmptySpace(SpaceType spaceType,
-                           bool permeable,
-                           char value,
-                           Space *top,
-                           Space *left,
-                           Space *right,
-                           Space *bottom);
+    EmptySpace(char value,
+               Space *top,
+               Space *left,
+               Space *right,
+               Space *bottom);
 };
 
 
