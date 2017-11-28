@@ -6,8 +6,16 @@
 #ifndef DOORSPACE_HPP
 #define DOORSPACE_HPP
 
-class DoorSpace {
+#include "space.hpp"
 
+class DoorSpace : Space{
+public:
+    DoorSpace();
+    DoorSpace::DoorSpace(char value,
+                         Space *top,
+                         Space *left,
+                         Space *right,
+                         Space *bottom);
 };
 
 

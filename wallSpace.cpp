@@ -26,5 +26,4 @@ WallSpace::WallSpace(char value,
                                               left,
                                               right,
                                               bottom) {
-
 }
