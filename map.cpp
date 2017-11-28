@@ -97,25 +97,25 @@ bool Map::importBoard(string fileName) {
             if (!startOfMap) {
                 tempUp = boardHead;
                 i = 0;
-                // get to y-axis location
+
                 if (i < height && width != 0) {
-                    while (i < height && width != 0) {
+                    while (i < height) {
+                        // get to y-axis location
+
                         current = current->getBottom();
 
                         if (!firstRow && i < height - 1) {
                             tempUp = tempUp->getBottom();
                         }
-
                         i++;
                     }
                 } else if (width == 0) {
                     while (i < height -1) {
+                        // get to y-axis location
                         current = current->getBottom();
-
                         if (!firstRow && i < height - 1) {
                             tempUp = tempUp->getBottom();
                         }
-
                         i++;
                     }
                 }
@@ -250,7 +250,6 @@ int Map::getBoardSizeY() {
 *********************************************************************/
 Map::~Map() {
     if (boardHead != nullptr) {
-        int i = 0, k = 0;
         Space *garbage = boardHead;
         Space *current = boardHead;
         Space *nextRowGarbage = nullptr;
@@ -263,26 +262,18 @@ Map::~Map() {
         // go through the list
         do {
             while (garbage != nullptr) {
-
                 // x-axis
                 current = current->getRight();
 
                 // get rid of the pointers
-
                 delete garbage;
-                if (i == 120) {
-                    i = 0;
-                }
                 garbage = current;
-                i++;
             }
 
             if (nextRowGarbage != nullptr) {
                 current = garbage = nextRowGarbage;
                 nextRowGarbage = nextRowGarbage->getBottom();
             }
-            i = 0;
-            k++;
         } while (garbage != nullptr);
     }
 }

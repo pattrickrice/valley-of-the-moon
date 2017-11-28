@@ -6,9 +6,19 @@
 #ifndef EMPTYSPACE_HPP
 #define EMPTYSPACE_HPP
 
+#include "space.hpp"
 
-class emptySpace {
+class EmptySpace : public Space {
+public:
+    EmptySpace();
 
+    EmptySpace::EmptySpace(SpaceType spaceType,
+                           bool permeable,
+                           char value,
+                           Space *top,
+                           Space *left,
+                           Space *right,
+                           Space *bottom);
 };
 
 
