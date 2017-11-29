@@ -72,8 +72,6 @@ bool Map::importBoard(string fileName) {
             }
         }
 
-        /** DEBUG cout << endl << "[MAX WIDTH] " << maxWidth << endl << "[HEIGHT] " << height << endl;*/
-
         // set object data members
         boardSizeX = maxWidth;
         boardSizeY = height + 1;
@@ -94,8 +92,6 @@ bool Map::importBoard(string fileName) {
             startOfMap = (boardHead == nullptr);
             firstRow = (height == 0);
             current = boardHead;
-
-            //cout << readChar;
 
             // if the board has been started
             if (!startOfMap) {
@@ -164,9 +160,6 @@ bool Map::importBoard(string fileName) {
                         nullptr);
                 boardHead = current;
             }
-
-            // set the previous pointer's right pointer
-
 
             // assign value
             width++;
@@ -312,12 +305,6 @@ int Map::getBoardSizeY() {
 Map::~Map() {
     if (boardHead != nullptr) {
 
-        // we need to do proper delete calls
-        EmptySpace *emptyGarbage;
-        WallSpace *wallGarbage;
-        KeySpace *keyGarbage;
-        DoorSpace *doorGarbage;
-
         Space *garbage = boardHead;
         Space *current = boardHead;
         Space *nextRowGarbage = nullptr;
@@ -332,32 +319,7 @@ Map::~Map() {
             while (garbage != nullptr) {
                 // x-axis
                 current = current->getRight();
-                SpaceType space = garbage->getSpaceType();
-
-                // get rid of the pointers
-                // figure out which type of space it is and
-                // properly delete
-                switch (space) {
-                    case EMPTY:
-                        emptyGarbage = static_cast<EmptySpace *>(garbage);
-                        delete emptyGarbage;
-                        break;
-                    case WALL:
-                        wallGarbage = static_cast<WallSpace *>(garbage);
-                        delete wallGarbage;
-                        break;
-                    case KEY:
-                        keyGarbage = static_cast<KeySpace *>(garbage);
-                        delete keyGarbage;
-                        break;
-                    case DOOR:
-                        doorGarbage = static_cast<DoorSpace *>(garbage);
-                        delete doorGarbage;
-                        break;
-                    default:
-                        delete garbage;
-                }
-
+                delete garbage;
                 garbage = current;
             }
 
