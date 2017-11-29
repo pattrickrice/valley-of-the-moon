@@ -72,8 +72,6 @@ bool Map::importBoard(string fileName) {
             }
         }
 
-        /** DEBUG cout << endl << "[MAX WIDTH] " << maxWidth << endl << "[HEIGHT] " << height << endl;*/
-
         // set object data members
         boardSizeX = maxWidth;
         boardSizeY = height + 1;
@@ -94,8 +92,6 @@ bool Map::importBoard(string fileName) {
             startOfMap = (boardHead == nullptr);
             firstRow = (height == 0);
             current = boardHead;
-
-            //cout << readChar;
 
             // if the board has been started
             if (!startOfMap) {
@@ -165,9 +161,6 @@ bool Map::importBoard(string fileName) {
                 boardHead = current;
             }
 
-            // set the previous pointer's right pointer
-
-
             // assign value
             width++;
             // end of line
@@ -195,7 +188,8 @@ bool Map::importBoard(string fileName) {
     return true;
 }
 
-void Map::printMap() {
+void Map::printMap(int XCoord, int YCoord) {
+    int x = 0, y = 0;
     string print;
     if (boardHead != nullptr) {
         auto current = boardHead;
@@ -209,14 +203,22 @@ void Map::printMap() {
         // go through the list
         do {
             while (current != nullptr) {
-                print += current->getValue();
+                // players position
+                if(x == XCoord && y == YCoord){
+                    print += 'P';
+                }else{
+                    print += current->getValue();
+                }
                 // x-axis
                 current = current->getRight();
+                x++;
             }
 
             if (nextRow != nullptr) {
                 current = nextRow;
                 nextRow = current->getBottom();
+                x = 0;
+                y++;
             }
         } while (current != nullptr);
 
@@ -238,39 +240,47 @@ Space *Map::setSpace(char value,
                      Space *right,
                      Space *bottom) {
     Space *newTile;
+    EmptySpace *newEmpty;
+    WallSpace *newWall;
+    KeySpace *newKey;
+    DoorSpace *newDoor;
 
     // create space based on value
     switch (value) {
         case ' ':
-            newTile = new EmptySpace(value,
-                                     top,
-                                     left,
-                                     right,
-                                     bottom);
+            newEmpty = new EmptySpace(value,
+                                      top,
+                                      left,
+                                      right,
+                                      bottom);
+            newTile = newEmpty;
             break;
         case '-':
         case '|':
         case '=':
         case '+':
-            newTile = new WallSpace(value,
-                                     top,
-                                     left,
-                                     right,
-                                     bottom);
+            newWall = new WallSpace(value,
+                                    top,
+                                    left,
+                                    right,
+                                    bottom);
+            newTile = newWall;
             break;
         case 'K':
-            newTile = new KeySpace(value,
-                                     top,
-                                     left,
-                                     right,
-                                     bottom);
+            newKey = new KeySpace(value,
+                                  top,
+                                  left,
+                                  right,
+                                  bottom);
+            newTile = newKey;
             break;
         case 'D':
-            newTile = new DoorSpace(value,
-                                   top,
-                                   left,
-                                   right,
-                                   bottom);
+            newDoor = new DoorSpace(value,
+                                    top,
+                                    left,
+                                    right,
+                                    bottom);
+            newTile = newDoor;
             break;
 
         default:
@@ -312,12 +322,6 @@ int Map::getBoardSizeY() {
 Map::~Map() {
     if (boardHead != nullptr) {
 
-        // we need to do proper delete calls
-        EmptySpace *emptyGarbage;
-        WallSpace *wallGarbage;
-        KeySpace *keyGarbage;
-        DoorSpace *doorGarbage;
-
         Space *garbage = boardHead;
         Space *current = boardHead;
         Space *nextRowGarbage = nullptr;
@@ -332,32 +336,7 @@ Map::~Map() {
             while (garbage != nullptr) {
                 // x-axis
                 current = current->getRight();
-                SpaceType space = garbage->getSpaceType();
-
-                // get rid of the pointers
-                // figure out which type of space it is and
-                // properly delete
-                switch (space) {
-                    case EMPTY:
-                        emptyGarbage = static_cast<EmptySpace *>(garbage);
-                        delete emptyGarbage;
-                        break;
-                    case WALL:
-                        wallGarbage = static_cast<WallSpace *>(garbage);
-                        delete wallGarbage;
-                        break;
-                    case KEY:
-                        keyGarbage = static_cast<KeySpace *>(garbage);
-                        delete keyGarbage;
-                        break;
-                    case DOOR:
-                        doorGarbage = static_cast<DoorSpace *>(garbage);
-                        delete doorGarbage;
-                        break;
-                    default:
-                        delete garbage;
-                }
-
+                delete garbage;
                 garbage = current;
             }
 

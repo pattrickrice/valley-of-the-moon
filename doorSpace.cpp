@@ -28,3 +28,4 @@ DoorSpace::DoorSpace(char value,
                                               bottom) {
 }
 
+void DoorSpace::printMessage(){}

@@ -19,6 +19,13 @@ public:
                Space *left,
                Space *right,
                Space *bottom);
+
+    void printMessage() override;
+
+    ~EmptySpace()
+    {
+        // Do some important cleanup
+    }
 };
 
 

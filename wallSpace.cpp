@@ -27,3 +27,6 @@ WallSpace::WallSpace(char value,
                                               right,
                                               bottom) {
 }
+void WallSpace::printMessage(){
+
+}
