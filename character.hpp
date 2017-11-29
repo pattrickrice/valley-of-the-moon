@@ -11,10 +11,9 @@ class Character {
         left, up, right, down
     };
 private:
+    Direction direction;
     int XCoord;
     int YCoord;
-    Direction direction;
-
 public:
     Character();
 
@@ -22,7 +21,19 @@ public:
 
     bool makeMove();
 
+    void moveLeft();
 
+    void moveRight();
+
+    void moveUp();
+
+    void moveDown();
+
+    int getXCoord();
+    int getYCoord();
+    int setXCoord(int);
+    int setYCoord(int);
 };
+
 
 #endif

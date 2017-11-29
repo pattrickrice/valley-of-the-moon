@@ -8,6 +8,7 @@
 #include "menu.hpp"
 #include "map.hpp"
 #include "utilities.hpp"
+#include "player.hpp"
 
 using std::cout;
 using std::endl;
@@ -16,7 +17,7 @@ int main() {
     // rand() function needs to be seeded only one time. Seeding
     // happens here so that it is only called once.
     unsigned seed;
-    seed = static_cast<unsigned int>(time(0));
+    seed = static_cast<unsigned int>(time(nullptr));
     srand(seed);
 
     int width = 90, mainMenuChoice = 0;
@@ -27,9 +28,16 @@ int main() {
     printCenteredString("A text-based adventure game", width);
     printBorder(width);
 
-    Map map1("test.txt");
-    map1.printMap();
-    Space *map = map1.getBoardHead();
+    Map map1("houseMap.txt");
+    Player p1(2,2);
+
+    // moves player
+    map1.printMap(p1.getXCoord(), p1.getYCoord());
+    // takes a,s,d,w
+    p1.makeMove('s');
+    map1.printMap(p1.getXCoord(), p1.getYCoord());
+
+
 
 
     return 0;

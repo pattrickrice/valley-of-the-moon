@@ -188,7 +188,8 @@ bool Map::importBoard(string fileName) {
     return true;
 }
 
-void Map::printMap() {
+void Map::printMap(int XCoord, int YCoord) {
+    int x = 0, y = 0;
     string print;
     if (boardHead != nullptr) {
         auto current = boardHead;
@@ -202,14 +203,22 @@ void Map::printMap() {
         // go through the list
         do {
             while (current != nullptr) {
-                print += current->getValue();
+                // players position
+                if(x == XCoord && y == YCoord){
+                    print += 'P';
+                }else{
+                    print += current->getValue();
+                }
                 // x-axis
                 current = current->getRight();
+                x++;
             }
 
             if (nextRow != nullptr) {
                 current = nextRow;
                 nextRow = current->getBottom();
+                x = 0;
+                y++;
             }
         } while (current != nullptr);
 
@@ -240,10 +249,10 @@ Space *Map::setSpace(char value,
     switch (value) {
         case ' ':
             newEmpty = new EmptySpace(value,
-                                     top,
-                                     left,
-                                     right,
-                                     bottom);
+                                      top,
+                                      left,
+                                      right,
+                                      bottom);
             newTile = newEmpty;
             break;
         case '-':
@@ -251,26 +260,26 @@ Space *Map::setSpace(char value,
         case '=':
         case '+':
             newWall = new WallSpace(value,
-                                     top,
-                                     left,
-                                     right,
-                                     bottom);
+                                    top,
+                                    left,
+                                    right,
+                                    bottom);
             newTile = newWall;
             break;
         case 'K':
             newKey = new KeySpace(value,
-                                     top,
-                                     left,
-                                     right,
-                                     bottom);
+                                  top,
+                                  left,
+                                  right,
+                                  bottom);
             newTile = newKey;
             break;
         case 'D':
             newDoor = new DoorSpace(value,
-                                   top,
-                                   left,
-                                   right,
-                                   bottom);
+                                    top,
+                                    left,
+                                    right,
+                                    bottom);
             newTile = newDoor;
             break;
 

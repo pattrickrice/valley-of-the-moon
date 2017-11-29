@@ -36,7 +36,7 @@ public:
                     Space *,
                     Space *);
 
-    void printMap();
+    void printMap(int XCoord, int YCoord);
 
     ~Map();
 };
