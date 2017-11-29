@@ -385,11 +385,11 @@ void printCenteredBox(string input, int width, char filler){
                 output += filler;
             }
         } else {
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
+            for (int i = 1; i < widthHalf - stringHalf; ++i) {
                 output += filler;
             }
             output += " " + input + " ";
-            for (int i = 2; i < widthHalf - stringHalf; ++i) {
+            for (int i = 1; i < widthHalf - stringHalf; ++i) {
                 output += filler;
             }
         }

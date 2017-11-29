@@ -19,7 +19,7 @@ int main() {
     seed = static_cast<unsigned int>(time(0));
     srand(seed);
 
-    int width = 100, mainMenuChoice = 0;
+    int width = 90, mainMenuChoice = 0;
     unsigned min = 0, max = 0;
 
 
@@ -27,7 +27,7 @@ int main() {
     printCenteredString("A text-based adventure game", width);
     printBorder(width);
 
-    Map map1("houseMap.txt");
+    Map map1("test.txt");
     map1.printMap();
     Space *map = map1.getBoardHead();
 

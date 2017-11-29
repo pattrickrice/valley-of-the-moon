@@ -29,4 +29,6 @@ EmptySpace::EmptySpace(char value,
                                               bottom) {
     this->money = 10000000;
 }
+void EmptySpace::printMessage(){}
+
 

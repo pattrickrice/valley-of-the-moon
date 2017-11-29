@@ -19,7 +19,17 @@ public:
              Space *left,
              Space *right,
              Space *bottom);
+
+    void printMessage() override ;
+
+    ~KeySpace()
+    {
+        // Do some important cleanup
+    }
+
 };
+
+
 
 
 #endif

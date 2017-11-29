@@ -57,8 +57,10 @@ public:
     Space *getBottom();
 
     char getValue();
+
+    virtual void printMessage() = 0;
     
-    ~Space();
+    virtual ~Space();
 };
 
 #endif

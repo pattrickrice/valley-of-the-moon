@@ -18,6 +18,14 @@ public:
               Space * left,
               Space * right,
               Space * bottom);
+
+    void printMessage() override ;
+
+    ~DoorSpace()
+    {
+        // Do some important cleanup
+    }
+
 };
 
 

@@ -4,6 +4,7 @@
  * Description: Implementation file for the keySpace class
 *********************************************************************/
 #include "keySpace.hpp"
+
 KeySpace::KeySpace() = default;
 
 /*********************************************************************
@@ -16,14 +17,18 @@ KeySpace::KeySpace() = default;
  * @param bottom is the bottom space pointer.
  ********************************************************************/
 KeySpace::KeySpace(char value,
-                     Space *top,
-                     Space *left,
-                     Space *right,
-                     Space *bottom) : Space(DOOR,
-                                            true,
-                                            value,
-                                            top,
-                                            left,
-                                            right,
-                                            bottom) {
+                   Space *top,
+                   Space *left,
+                   Space *right,
+                   Space *bottom) : Space(DOOR,
+                                          true,
+                                          value,
+                                          top,
+                                          left,
+                                          right,
+                                          bottom) {
+}
+
+void KeySpace::printMessage() {
+
 }

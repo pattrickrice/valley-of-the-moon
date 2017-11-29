@@ -231,39 +231,47 @@ Space *Map::setSpace(char value,
                      Space *right,
                      Space *bottom) {
     Space *newTile;
+    EmptySpace *newEmpty;
+    WallSpace *newWall;
+    KeySpace *newKey;
+    DoorSpace *newDoor;
 
     // create space based on value
     switch (value) {
         case ' ':
-            newTile = new EmptySpace(value,
+            newEmpty = new EmptySpace(value,
                                      top,
                                      left,
                                      right,
                                      bottom);
+            newTile = newEmpty;
             break;
         case '-':
         case '|':
         case '=':
         case '+':
-            newTile = new WallSpace(value,
+            newWall = new WallSpace(value,
                                      top,
                                      left,
                                      right,
                                      bottom);
+            newTile = newWall;
             break;
         case 'K':
-            newTile = new KeySpace(value,
+            newKey = new KeySpace(value,
                                      top,
                                      left,
                                      right,
                                      bottom);
+            newTile = newKey;
             break;
         case 'D':
-            newTile = new DoorSpace(value,
+            newDoor = new DoorSpace(value,
                                    top,
                                    left,
                                    right,
                                    bottom);
+            newTile = newDoor;
             break;
 
         default:
