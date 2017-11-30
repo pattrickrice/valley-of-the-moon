@@ -7,7 +7,6 @@
 #include "utilities.hpp"
 #include <sstream>
 #include <iomanip>
-
 using std::stringstream;
 using std::cout;
 using std::cin;
@@ -66,7 +65,7 @@ unsigned int getInt(unsigned int min, unsigned int max) {
         }
     } while (!validInput);
     return validInt;
-};
+}
 
 /*********************************************************************
  * Double validation. Takes the entire line as a string,
@@ -105,7 +104,7 @@ double getDouble(double min, double max) {
         }
     } while (!validInput);
     return validDouble;
-};
+}
 
 /*********************************************************************
  * String validation. Takes the entire line as a string.
@@ -150,7 +149,88 @@ string getString(unsigned int min, unsigned int max) {
     } while (!validInput);
     return userInput;
 
-};
+}
+
+/*********************************************************************
+ * Retrieves a character from the user, requires a return.
+*********************************************************************/
+char getCharacterWithReturn(char acceptable[], int size) {
+    char inputChar = 'a';
+    string inputString;
+    bool valid = false;
+
+    // loop if not valid character
+    while(!valid) {
+        // get input
+        getline(cin, inputString);
+        stringstream ss(inputString);
+
+        // first character is user input
+        ss >> inputString;
+        inputChar = inputString.at(0);
+
+        // check that it is acceptable.
+        for (int i = 0; i < size; ++i) {
+            if(inputChar == acceptable[i]){
+                valid = true;
+            }
+        }
+        if(!valid){
+            cout << "Please choose from: ";
+
+            for (int i = 0; i < size -1; ++i) {
+                cout << acceptable[i] + ", ";
+            }
+            cout << acceptable[size-1] + ' ';
+        }
+    }
+
+    return inputChar;
+}
+
+/*********************************************************************
+ * Retrieves a character from the user.
+ * @warning Relies on Linux commands
+ * Source: https://stackoverflow.com/questions/1798511/how-to-avoid-press-enter-with-any-getchar
+*********************************************************************/
+char getCharacterNoReturn(char acceptable[], int size) {
+    bool valid = false;
+    unsigned int containsInt = 0;
+    string userInput;
+    string output;
+
+    char inputChar = 'a';
+    char pushing;
+
+    // acceptable characters
+    for (int i = 0; i < size -1; ++i) {
+        pushing = acceptable[i];
+        output.push_back(pushing);
+        output+= ", ";
+    }
+    output.push_back(acceptable[size-1]);
+
+
+    // loop if not valid character
+    while(!valid) {
+        // get input
+        system("stty raw");
+        cin.get(inputChar);
+        system("stty cooked");
+        cout << endl;
+
+        // check that it is acceptable.
+        for (int i = 0; i < size; ++i) {
+            if(inputChar == acceptable[i]){
+                valid = true;
+            }
+        }
+        if(!valid){
+            cout << "Please choose from: " + output << endl;
+        }
+    }
+    return inputChar;
+}
 
 /*********************************************************************
  * Takes a string and formats the output to have a border on the left
@@ -176,7 +256,7 @@ void printLeftAligned(string input, int width) {
     //right border
     output += "|\n";
     cout << output;
-};
+}
 
 /*********************************************************************
  * Takes a string and formats the output to have the string in the
@@ -187,7 +267,7 @@ void printLeftAligned(string input, int width) {
  ********************************************************************/
 void printCenterTitle(string input, int width) {
     printCenteredBox(input, width, '-');
-};
+}
 
 /*********************************************************************
  * Takes a string and formats the output to have the string in the
@@ -197,8 +277,8 @@ void printCenterTitle(string input, int width) {
  * @width is the width of the box the string will be inside
  ********************************************************************/
 void printBoldCenterTitle(string input, int width) {
-     printCenteredBox(input, width, '=');
-};
+    printCenteredBox(input, width, '=');
+}
 
 /*********************************************************************
  * Takes a string and formats the output to have the string in the
@@ -209,7 +289,7 @@ void printBoldCenterTitle(string input, int width) {
  ********************************************************************/
 void printCenteredString(string input, int width) {
     printCenteredBox(input, width, ' ');
-};
+}
 
 /*********************************************************************
  * Prints a border with "-" dependent on the width given.
@@ -232,7 +312,7 @@ void printBorder(int width) {
  ********************************************************************/
 bool isEven(int number) {
     return number % 2 == 0;
-};
+}
 
 /*********************************************************************
  * Formats a statement with a string and a dollar amount. Prints
@@ -248,7 +328,7 @@ void printMoneyStatement(string prefix, double money, int width) {
     stringstream dollarAmount;
     dollarAmount << "$" << std::fixed << std::setprecision(2) << money;
     printLeftAndRightAlignedStrings(prefix, dollarAmount.str(), width);
-};
+}
 
 /*********************************************************************
  * Formats a statement with a string and a value that displays two
@@ -261,7 +341,7 @@ void printTwoDecimalStatement(string prefix, double value, int width) {
     stringstream twoDecimalValue;
     twoDecimalValue << std::fixed << std::setprecision(2) << value;
     printLeftAndRightAlignedStrings(prefix, twoDecimalValue.str(), width);
-};
+}
 
 /*********************************************************************
  * Formats and returns a double as a two decimal string.
@@ -271,7 +351,7 @@ string formatTwoDecimalDouble(double value) {
     stringstream twoDecimalValue;
     twoDecimalValue << std::fixed << std::setprecision(2) << value;
     return twoDecimalValue.str();
-};
+}
 
 /*********************************************************************
  * Prints one line with a left aligned string and a right aligned
@@ -300,7 +380,7 @@ void printLeftAndRightAlignedStrings(string prefix, string suffix, int width) {
     //right border
     output += "|\n";
     cout << output;
-};
+}
 
 /*********************************************************************
  * Gets a string with multiple words in it.
@@ -320,13 +400,12 @@ string getMultiWordString(unsigned int min, unsigned int max) {
             cout << "The word must be between "
                  << min << " and "
                  << max << " letters long" << endl;
-        }
-        else {
+        } else {
             validInput = true;
         }
     } while (!validInput);
     return userInput;
-};
+}
 
 /*********************************************************************
  * Prompts the user to enter a multiline address.
@@ -350,7 +429,7 @@ string getAddress() {
         }
     } while (!validInput);
     return address;
-};
+}
 
 /*********************************************************************
  * Takes a string and formats the output to have the string in the
@@ -360,7 +439,7 @@ string getAddress() {
  * @width is the width of the box the string will be inside
  * @filler is the character filling the line.
  ********************************************************************/
-void printCenteredBox(string input, int width, char filler){
+void printCenteredBox(string input, int width, char filler) {
     string output;
     unsigned long stringLength = input.length();
     bool stringEven = isEven(static_cast<int>(stringLength));

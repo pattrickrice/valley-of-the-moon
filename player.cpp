@@ -5,6 +5,11 @@
 *********************************************************************/
 
 #include "player.hpp"
+#include <iostream>
+#include "utilities.hpp"
+using std::cout;
+using std::endl;
+using std::cin;
 
 /*********************************************************************
  * Constructor
@@ -16,8 +21,14 @@ Player::Player(int XCoord, int YCoord) : Character(XCoord, YCoord){}
 /*********************************************************************
  *
 *********************************************************************/
-bool Player::makeMove(char input){
-    switch (input){
+bool Player::makeMove(){
+    int size = 5;
+    char acceptable[size] = {'a', 's', 'd', 'w', 'e'};
+    cout << "a = left, s = down, d = right, w = up" << endl;
+    cout << "Enter move: ";
+    char move = getCharacterNoReturn(acceptable, size);
+
+    switch (move){
         //D-pad controller
         case 'a':
             moveLeft();

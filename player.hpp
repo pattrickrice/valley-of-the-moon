@@ -13,7 +13,7 @@ private:
 public:
     Player(int XCoord, int YCoord);
 
-    bool makeMove(char);
+    bool makeMove();
 
 
     //void getUserInput();

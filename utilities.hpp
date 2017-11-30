@@ -18,6 +18,10 @@ string getString(unsigned int min, unsigned int max);
 
 double getDouble(double min, double max);
 
+char getCharacterWithReturn(char acceptable[], int size);
+
+char getCharacterNoReturn(char acceptable[], int size);
+
 void printLeftAligned(string, int);
 
 void printCenterTitle(string, int);

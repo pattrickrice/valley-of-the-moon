@@ -83,15 +83,30 @@ void Character::moveDown() {
     YCoord++;
 }
 
+/*********************************************************************
+ * Returns the character's x-coordinate
+ ********************************************************************/
 int Character::getXCoord(){
     return XCoord;
 }
+
+/*********************************************************************
+ * Returns the character's y-coordinate
+ ********************************************************************/
 int Character::getYCoord(){
     return YCoord;
 }
+
+/*********************************************************************
+ * Sets the character's x-coordinate
+ ********************************************************************/
 int Character::setXCoord(int XCoord){
     this->XCoord = XCoord;
 }
+
+/*********************************************************************
+ * sets the character's y-coordinate
+ ********************************************************************/
 int Character::setYCoord(int YCoord){
     this->YCoord = YCoord;
 }

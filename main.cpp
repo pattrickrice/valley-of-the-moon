@@ -22,6 +22,7 @@ int main() {
 
     int width = 90, mainMenuChoice = 0;
     unsigned min = 0, max = 0;
+    bool moved = true;
 
 
     printBoldCenterTitle("Valley of the Moon", width);
@@ -29,15 +30,13 @@ int main() {
     printBorder(width);
 
     Map map1("houseMap.txt");
-    Player p1(2,2);
+    Player p1(2, 2);
 
-    // moves player
-    map1.printMap(p1.getXCoord(), p1.getYCoord());
-    // takes a,s,d,w
-    p1.makeMove('s');
-    map1.printMap(p1.getXCoord(), p1.getYCoord());
-
-
+    while (moved) {
+        // takes a,s,d,w
+        moved = p1.makeMove();
+        map1.printMap(p1.getXCoord(), p1.getYCoord());
+    }
 
 
     return 0;
