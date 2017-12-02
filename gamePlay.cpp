@@ -3,13 +3,13 @@
  * Date: 12/1/2017
  * Description: Implementation file for the gameState class
 *********************************************************************/
-#include "gameState.hpp"
+#include "gamePlay.hpp"
 #include "utilities.hpp"
 
 /*********************************************************************
  * Default constructor
 *********************************************************************/
-GameState::GameState() {
+GamePlay::GamePlay() {
     Player player(2, 2);
     this->player = player;
     this->width = 90;
@@ -20,7 +20,7 @@ GameState::GameState() {
  * Constructor
  * @param width is the width of the console output
 *********************************************************************/
-GameState::GameState(int width) {
+GamePlay::GamePlay(int width) {
     Player player(0, 0);
     Map map("houseMap.txt");
     this->player = player;
@@ -33,7 +33,7 @@ GameState::GameState(int width) {
  * @param width is the width of the console output
  * @param fileName the of the map
 *********************************************************************/
-GameState::GameState(int width, string fileName){
+GamePlay::GamePlay(int width, string fileName){
     Player player(0, 0);
     this->player = player;
     this->width = width;
@@ -47,7 +47,7 @@ GameState::GameState(int width, string fileName){
  * @param player is the player object and can include starting
  * information such as its initial position.
 *********************************************************************/
-GameState::GameState(int width, string fileName, Player player){
+GamePlay::GamePlay(int width, string fileName, Player player){
     Map map(fileName);
     this->player = player;
     this->width = width;
@@ -58,7 +58,7 @@ GameState::GameState(int width, string fileName, Player player){
  * Contains the game play for th game. Continues until the player
  * chooses to exit the game.
 *********************************************************************/
-void GameState::play(){
+void GamePlay::play(){
     Map map(this->startingMap);
     bool moved = true;
     map.printMap(player.getXCoord(), player.getYCoord());

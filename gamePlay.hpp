@@ -9,7 +9,7 @@
 #include "player.hpp"
 #include "map.hpp"
 
-class GameState {
+class GamePlay {
 private:
     int width;
     Player player;
@@ -17,10 +17,10 @@ private:
 //    Space *board;
 
 public:
-    GameState();
-    GameState(int);
-    GameState(int, string);
-    GameState(int, string, Player);
+    GamePlay();
+    GamePlay(int);
+    GamePlay(int, string);
+    GamePlay(int, string, Player);
 
     void play();
 

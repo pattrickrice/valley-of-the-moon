@@ -8,7 +8,7 @@
 #include "menu.hpp"
 #include "map.hpp"
 #include "utilities.hpp"
-#include "gameState.hpp"
+#include "gamePlay.hpp"
 
 using std::cout;
 using std::endl;
@@ -27,7 +27,7 @@ int main() {
     printCenteredString("A text-based adventure game", width);
     printBorder(width);
 
-    GameState gameState;
+    GamePlay gameState;
     gameState.play();
 
     printBoldCenterTitle("Goodbye", width);
