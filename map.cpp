@@ -294,6 +294,42 @@ Space *Map::setSpace(char value,
     return newTile;
 }
 
+Space *Map::getSpace(int XCoord, int YCoord){
+    int x = 0, y = 0;
+    if (boardHead != nullptr) {
+        Space* current = boardHead;
+        Space* nextRow = boardHead;
+
+        // there is a another row
+        if (boardHead->getBottom() != nullptr) {
+            nextRow = boardHead->getBottom();
+        }
+
+        // go through the list
+        do {
+            while (current != nullptr) {
+                // players position
+                if(x == XCoord && y == YCoord){
+                    cout << "Player is at X: " << x << " Y: " << y << endl;
+                    return current;
+                }
+                // x-axis
+                current = current->getRight();
+                x++;
+            }
+
+            if (nextRow != nullptr) {
+                current = nextRow;
+                nextRow = current->getBottom();
+                x = 0;
+                y++;
+            }
+        } while (current != nullptr);
+    }
+    cout << "[ERROR] Did not find player" << endl;
+
+}
+
 
 /*********************************************************************
  * Returns the board pointer

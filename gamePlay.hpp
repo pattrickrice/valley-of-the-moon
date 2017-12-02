@@ -18,8 +18,11 @@ private:
 
 public:
     GamePlay();
+
     GamePlay(int);
+
     GamePlay(int, string);
+
     GamePlay(int, string, Player);
 
     void play();

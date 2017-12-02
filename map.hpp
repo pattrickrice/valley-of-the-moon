@@ -38,6 +38,8 @@ public:
 
     void printMap(int XCoord, int YCoord);
 
+    Space *getSpace(int, int);
+
     ~Map();
 };
 

@@ -67,12 +67,11 @@ void GamePlay::play(){
     while (moved) {
         // takes a,s,d,w
         moved = player.makeMove();
+        map.getSpace(player.getXCoord(), player.getYCoord());
         system("clear");
         map.printMap(player.getXCoord(), player.getYCoord());
     }
 }
-
-
 
 
 
