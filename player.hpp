@@ -11,6 +11,8 @@
 class Player : public Character {
 private:
 public:
+    Player();
+
     Player(int XCoord, int YCoord);
 
     bool makeMove();

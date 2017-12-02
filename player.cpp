@@ -11,6 +11,8 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+Player::Player() : Character(0, 0){}
+
 /*********************************************************************
  * Constructor
  * @param XCoord is the player's starting X position.

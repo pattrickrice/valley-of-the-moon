@@ -192,8 +192,8 @@ void Map::printMap(int XCoord, int YCoord) {
     int x = 0, y = 0;
     string print;
     if (boardHead != nullptr) {
-        auto current = boardHead;
-        auto nextRow = boardHead;
+        Space* current = boardHead;
+        Space* nextRow = boardHead;
 
         // there is a another row
         if (boardHead->getBottom() != nullptr) {

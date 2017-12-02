@@ -1,5 +1,7 @@
 OJBS = main.o  menu.o utilities.o map.o character.o space.o \
-emptySpace.o wallSpace.o keySpace.o doorSpace.o player.o
+emptySpace.o wallSpace.o keySpace.o doorSpace.o player.o \
+gameState.o
+
 CC = g++
 CFLAGS = -c -std=c++0x -Wall
 LFLAGS = -g -std=c++0x -Wall -o
@@ -52,6 +54,10 @@ doorSpace.o: doorSpace.cpp
 player.o: player.cpp
 	@echo '[BUILDING] ... player'
 	@$(CC) $(CFLAGS) player.cpp
+
+gameState.o: gameState.cpp
+	@echo '[BUILDING] ... main'
+	@$(CC) $(CFLAGS) gameState.cpp
 
 clean:
 	@echo '[CLEANING] ... removing .o files'

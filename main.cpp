@@ -8,7 +8,7 @@
 #include "menu.hpp"
 #include "map.hpp"
 #include "utilities.hpp"
-#include "player.hpp"
+#include "gameState.hpp"
 
 using std::cout;
 using std::endl;
@@ -21,23 +21,16 @@ int main() {
     srand(seed);
 
     int width = 90, mainMenuChoice = 0;
-    unsigned min = 0, max = 0;
-    bool moved = true;
 
 
     printBoldCenterTitle("Valley of the Moon", width);
     printCenteredString("A text-based adventure game", width);
     printBorder(width);
 
-    Map map1("houseMap.txt");
-    Player p1(2, 2);
+    GameState gameState;
+    gameState.play();
 
-    while (moved) {
-        // takes a,s,d,w
-        moved = p1.makeMove();
-        map1.printMap(p1.getXCoord(), p1.getYCoord());
-    }
-
+    printBoldCenterTitle("Goodbye", width);
 
     return 0;
 }
