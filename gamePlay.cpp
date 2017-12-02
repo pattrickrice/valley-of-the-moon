@@ -3,6 +3,7 @@
  * Date: 12/1/2017
  * Description: Implementation file for the gameState class
 *********************************************************************/
+#include <cstdlib>
 #include "gamePlay.hpp"
 #include "utilities.hpp"
 
