@@ -21,7 +21,7 @@ KeySpace::KeySpace(char value,
                    Space *left,
                    Space *right,
                    Space *bottom,
-                   MapState mapState) : Space(KEY,
+                   MapState mapState, string key) : Space(KEY,
                                               true,
                                               value,
                                               top,
@@ -29,6 +29,32 @@ KeySpace::KeySpace(char value,
                                               right,
                                               bottom,
                                               mapState) {
+    this->key = key;
+    this->keyPresent = true;
+}
+
+/*********************************************************************
+ * Returns the value of the key
+ ********************************************************************/
+string KeySpace::getKey(){
+    return key;
+}
+
+/*********************************************************************
+ * Returns if the user has taken the key.
+ ********************************************************************/
+bool KeySpace::isKeyPresent(){
+    keyPresent;
+}
+
+/*********************************************************************
+ * Returns key value to user, changes the display character for the
+ * screen.
+ ********************************************************************/
+string KeySpace::takeKey() {
+    setValue(' ');
+    keyPresent = false;
+    return key;
 }
 
 void KeySpace::printMessage() {

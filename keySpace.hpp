@@ -9,11 +9,13 @@
 
 #include "space.hpp"
 #include <string>
+
 using std::string;
 
 
 class KeySpace : public Space {
     string key;
+    bool keyPresent;
 public:
     KeySpace();
 
@@ -22,18 +24,20 @@ public:
              Space *left,
              Space *right,
              Space *bottom,
-             MapState mapState);
+             MapState mapState,
+             string key);
 
-    void printMessage() override ;
+    void printMessage() override;
 
-    ~KeySpace()
-    {
-        // Do some important cleanup
-    }
+    string getKey();
+
+    bool isKeyPresent();
+
+    string takeKey();
+
+    ~KeySpace() {}
 
 };
-
-
 
 
 #endif

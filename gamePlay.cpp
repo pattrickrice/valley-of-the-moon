@@ -6,9 +6,12 @@
 #include <cstdlib>
 #include "gamePlay.hpp"
 #include "utilities.hpp"
+#include "keySpace.hpp"
+#include <vector>
 
 using std::cout;
 using std::endl;
+using std::vector;
 
 /*********************************************************************
  * Default constructor
@@ -64,10 +67,14 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player)
  * chooses to exit the game.
 *********************************************************************/
 void GamePlay::play() {
-    Map house("houseMap.txt", HOUSE);
+    Map house("houseMap.txt", "houseKeys.txt", HOUSE);
     MapState mapState = HOUSE;
-    char move = ' ';
     Space *playerSpace;
+    player.setXCoord(house.getPlayerStartingX());
+    player.setYCoord(house.getPlayerStartingY());
+    char move = ' ';
+    KeySpace *keySpace;
+    string newKey;
     int size = 5;
     char acceptable[size] = {'a', 's', 'd', 'w', 'e'};
 
@@ -100,6 +107,12 @@ void GamePlay::play() {
                 cout << "[ERROR] in MapState in GamePlay.cpp" << endl;
         };
 
+        if(playerSpace->getSpaceType() == KEY){
+            keySpace = dynamic_cast<KeySpace *>(playerSpace);
+            newKey = keySpace->takeKey();
+            player.pickUpKey(newKey);
+            cout << "You picked up the key: " + newKey + " !" << endl;
+        }
         cout << instructions;
         move = getCharacterNoReturn(acceptable, size);
         player.makeMove(move, playerSpace);

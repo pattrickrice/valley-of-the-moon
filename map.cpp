@@ -20,15 +20,35 @@ using std::cout;
 *********************************************************************/
 Map::Map() {
     this->boardHead = nullptr;
+    this->keyCounter = 0;
 }
 
 /*********************************************************************
  * Constructor taking the name of the file.
  * @param filename is the name of the map file.
 *********************************************************************/
-Map::Map(string filename, MapState mapState) {
+Map::Map(string mapFileName, string keyFileName, MapState mapState) {
+    this->keyCounter = 0;
     this->boardHead = nullptr;
-    importBoard(filename, mapState);
+    importKeys(keyFileName);
+    importBoard(mapFileName, mapState);
+}
+
+bool Map::importKeys(string keyFileName) {
+    fstream fileStream;
+    string readKey;
+    fileStream.open(keyFileName);
+
+    // could not open
+    if (fileStream.fail()) {
+        cout << "[ERROR] Could not open " + keyFileName << endl;
+        return false;
+    } else {
+        while (fileStream >> keyFileName) {
+            keys.push_back(keyFileName);
+        }
+    }
+    fileStream.close();
 }
 
 /*********************************************************************
@@ -141,7 +161,8 @@ bool Map::importBoard(string fileName, MapState mapState) {
                         current,
                         nullptr,
                         nullptr,
-                        mapState));
+                        mapState,
+                width, height));
 
                 if (height != 0) {
                     tempUp->getRight()->setBottom(current->getRight());
@@ -154,7 +175,9 @@ bool Map::importBoard(string fileName, MapState mapState) {
                         nullptr,
                         nullptr,
                         nullptr,
-                        mapState));
+                        mapState,
+                        width,
+                        height));
             } else {
                 current = this->setSpace(
                         readChar,
@@ -162,7 +185,9 @@ bool Map::importBoard(string fileName, MapState mapState) {
                         nullptr,
                         nullptr,
                         nullptr,
-                        mapState);
+                        mapState,
+                        width,
+                        height);
                 boardHead = current;
             }
 
@@ -249,7 +274,9 @@ Space *Map::setSpace(char value,
                      Space *left,
                      Space *right,
                      Space *bottom,
-                     MapState mapState) {
+                     MapState mapState,
+                     int currentX,
+                     int currentY) {
     Space *newTile;
     EmptySpace *newEmpty;
     WallSpace *newWall;
@@ -270,7 +297,10 @@ Space *Map::setSpace(char value,
         case '-':
         case '|':
         case '=':
+        case '/':
+        case '\\':
         case '+':
+        case '_':
             newWall = new WallSpace(value,
                                     top,
                                     left,
@@ -285,7 +315,9 @@ Space *Map::setSpace(char value,
                                   left,
                                   right,
                                   bottom,
-                                  mapState);
+                                  mapState,
+                                  keys.at(keyCounter));
+            keyCounter++;
             newTile = newKey;
             break;
         case 'D':
@@ -297,6 +329,11 @@ Space *Map::setSpace(char value,
                                     mapState);
             newTile = newDoor;
             break;
+
+        case 'S':
+            playerStartingX = currentX;
+            playerStartingY = currentY;
+            value = ' ';
 
         default:
             newTile = new EmptySpace(value,
@@ -345,6 +382,15 @@ Space *Map::getSpace(int XCoord, int YCoord) {
     cout << "[ERROR] Did not find player" << endl;
 
 }
+
+int Map::getPlayerStartingX(){
+    return playerStartingX;
+}
+
+int Map::getPlayerStartingY(){
+    return playerStartingY;
+}
+
 
 
 /*********************************************************************

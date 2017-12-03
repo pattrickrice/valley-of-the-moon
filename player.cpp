@@ -79,4 +79,29 @@ MapState Player::moveDown(Space *playerSpace) {
     return Character::moveDown(playerSpace);
 }
 
+/*********************************************************************
+ * Adds the key to the character's pocket
+ * @param key is the key being added to the set.
+ ********************************************************************/
+void Player::pickUpKey(string key){
+    keys.insert(key);
+}
+
+/*********************************************************************
+ * Adds the key to the character's pocket
+ * @param key is the key we are looking for
+ * sources cited: https://stackoverflow.com/questions/6277646/in-c-check-if-stdvectorstring-contains-a-certain-value
+ ********************************************************************/
+bool Player::hasKey(string key){
+    return keys.find(key) != keys.end();
+}
+
+/*********************************************************************
+ * Returns the set of the player's keys.
+ ********************************************************************/
+set<string> Player::getKeys(){
+    return keys;
+}
+
+
 

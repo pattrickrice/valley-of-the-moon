@@ -8,21 +8,29 @@
 
 #include "space.hpp"
 #include <iostream>
+#include <vector>
 
 using std::string;
+using std::vector;
 
 class Map {
 private:
     Space *boardHead;
     int boardSizeX;
     int boardSizeY;
+    int playerStartingX;
+    int playerStartingY;
+    vector<string> keys;
+    unsigned long keyCounter;
 
     bool importBoard(string filename, MapState mapState);
+
+    bool importKeys(string filename);
 
 public:
     Map();
 
-    Map(string filename, MapState mapState);
+    Map(string mapFileName, string keyFileName, MapState mapState);
 
     Space *getBoardHead();
 
@@ -35,11 +43,17 @@ public:
                     Space *,
                     Space *,
                     Space *,
-                    MapState);
+                    MapState,
+                    int currentX,
+                    int currentY);
 
     void printMap(int XCoord, int YCoord);
 
     Space *getSpace(int, int);
+
+    int getPlayerStartingX();
+
+    int getPlayerStartingY();
 
     ~Map();
 };

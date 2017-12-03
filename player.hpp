@@ -6,12 +6,15 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
+#include <set>
 #include "character.hpp"
 #include "space.hpp"
 #include "map.hpp"
+using std::set;
 
 class Player : public Character {
 private:
+    set<string> keys;
 public:
     Player();
 
@@ -19,13 +22,19 @@ public:
 
     MapState makeMove(char, Space *);
 
-    MapState moveUp(Space *);
+    MapState moveUp(Space *) override;
 
-    MapState moveRight(Space *);
+    MapState moveRight(Space *) override;
 
-    MapState moveLeft(Space *);
+    MapState moveLeft(Space *) override;
 
-    MapState moveDown(Space *);
+    MapState moveDown(Space *) override;
+
+    void pickUpKey(string);
+
+    bool hasKey(string);
+
+    set<string> getKeys();
 };
 
 

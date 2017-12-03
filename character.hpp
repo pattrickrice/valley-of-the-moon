@@ -6,7 +6,11 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
+#include <string>
+#include <vector>
 #include "space.hpp"
+using std::vector;
+using std::string;
 
 class Character {
     enum Direction {
@@ -16,6 +20,7 @@ private:
     Direction direction;
     int XCoord;
     int YCoord;
+    vector<string> keys;
 public:
     Character();
 
