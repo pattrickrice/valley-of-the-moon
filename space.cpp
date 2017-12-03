@@ -40,8 +40,8 @@ Space::Space(SpaceType spaceType,
     this->value = value;
     setTop(top);
     setLeft(left);
-    setBottom(right);
-    setRight(bottom);
+    setBottom(bottom);
+    setRight(right);
 }
 
 /*********************************************************************
@@ -138,6 +138,13 @@ Space *Space::getBottom() {
  ********************************************************************/
 char Space::getValue() {
     return value;
+}
+
+/*********************************************************************
+ * Returns if the space is permiable
+ ********************************************************************/
+bool Space::isPermiable(){
+    return permiable;
 }
 
 /*********************************************************************

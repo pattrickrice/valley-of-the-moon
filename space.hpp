@@ -58,6 +58,8 @@ public:
 
     char getValue();
 
+    bool isPermiable();
+
     virtual void printMessage() = 0;
     
     virtual ~Space();

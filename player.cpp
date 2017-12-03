@@ -23,26 +23,21 @@ Player::Player(int XCoord, int YCoord) : Character(XCoord, YCoord){}
 /*********************************************************************
  *
 *********************************************************************/
-bool Player::makeMove(){
-    int size = 5;
-    char acceptable[size] = {'a', 's', 'd', 'w', 'e'};
-    cout << "a = left, s = down, d = right, w = up" << endl;
-    cout << "Enter move: ";
-    char move = getCharacterNoReturn(acceptable, size);
+bool Player::makeMove(char move, Space * playerSpace){
 
     switch (move){
         //D-pad controller
         case 'a':
-            moveLeft();
+            moveLeft(playerSpace);
             break;
         case 's':
-            moveDown();
+            moveDown(playerSpace);
             break;
         case 'd':
-            moveRight();
+            moveRight(playerSpace);
             break;
         case 'w':
-            moveUp();
+            moveUp(playerSpace);
             break;
         default:
             //TODO
@@ -51,3 +46,35 @@ bool Player::makeMove(){
     }
     return true;
 };
+
+/*********************************************************************
+ * Moves character left
+ ********************************************************************/
+bool Player::moveLeft(Space *playerSpace) {
+    return Character::moveLeft(playerSpace);
+}
+
+/*********************************************************************
+ * Moves character right
+ ********************************************************************/
+bool Player::moveRight(Space *playerSpace) {
+    return Character::moveRight(playerSpace);
+}
+
+/*********************************************************************
+ * Moves character up
+ ********************************************************************/
+bool Player::moveUp(Space *playerSpace) {
+    // inverted
+    return Character::moveUp(playerSpace);
+}
+
+/*********************************************************************
+ * Moves character down
+ ********************************************************************/
+bool Player::moveDown(Space *playerSpace) {
+    // inverted
+    return Character::moveDown(playerSpace);
+}
+
+

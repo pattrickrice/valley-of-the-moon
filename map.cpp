@@ -132,9 +132,6 @@ bool Map::importBoard(string fileName) {
                 }
             }
 
-            if (readChar == 6) {
-                cout << "here";
-            }
             // assign value
             // first tile of map
             if (boardHead != nullptr && width != 0) {
@@ -144,10 +141,15 @@ bool Map::importBoard(string fileName) {
                         current,
                         nullptr,
                         nullptr));
+
+                if (height != 0) {
+                    tempUp->getRight()->setBottom(current->getRight());
+                }
+
             } else if (boardHead != nullptr) {
                 current->setBottom(this->setSpace(
                         readChar,
-                        nullptr,
+                        current,
                         nullptr,
                         nullptr,
                         nullptr));
@@ -192,8 +194,8 @@ void Map::printMap(int XCoord, int YCoord) {
     int x = 0, y = 0;
     string print;
     if (boardHead != nullptr) {
-        Space* current = boardHead;
-        Space* nextRow = boardHead;
+        Space *current = boardHead;
+        Space *nextRow = boardHead;
 
         // there is a another row
         if (boardHead->getBottom() != nullptr) {
@@ -204,9 +206,9 @@ void Map::printMap(int XCoord, int YCoord) {
         do {
             while (current != nullptr) {
                 // players position
-                if(x == XCoord && y == YCoord){
+                if (x == XCoord && y == YCoord) {
                     print += 'P';
-                }else{
+                } else {
                     print += current->getValue();
                 }
                 // x-axis
@@ -294,11 +296,11 @@ Space *Map::setSpace(char value,
     return newTile;
 }
 
-Space *Map::getSpace(int XCoord, int YCoord){
+Space *Map::getSpace(int XCoord, int YCoord) {
     int x = 0, y = 0;
     if (boardHead != nullptr) {
-        Space* current = boardHead;
-        Space* nextRow = boardHead;
+        Space *current = boardHead;
+        Space *nextRow = boardHead;
 
         // there is a another row
         if (boardHead->getBottom() != nullptr) {
@@ -309,7 +311,7 @@ Space *Map::getSpace(int XCoord, int YCoord){
         do {
             while (current != nullptr) {
                 // players position
-                if(x == XCoord && y == YCoord){
+                if (x == XCoord && y == YCoord) {
                     cout << "Player is at X: " << x << " Y: " << y << endl;
                     return current;
                 }

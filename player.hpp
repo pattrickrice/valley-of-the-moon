@@ -7,6 +7,7 @@
 #define PLAYER_HPP
 
 #include "character.hpp"
+#include "space.hpp"
 
 class Player : public Character {
 private:
@@ -15,7 +16,12 @@ public:
 
     Player(int XCoord, int YCoord);
 
-    bool makeMove();
+    bool makeMove(char, Space *);
+
+    bool moveUp(Space *);
+    bool moveRight(Space *);
+    bool moveLeft(Space *);
+    bool moveDown(Space *);
 
 
     //void getUserInput();

@@ -6,6 +6,8 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
+#include "space.hpp"
+
 class Character {
     enum Direction {
         left, up, right, down
@@ -21,13 +23,13 @@ public:
 
     bool makeMove();
 
-    void moveLeft();
+    virtual bool moveLeft(Space *);
 
-    void moveRight();
+    virtual bool moveRight(Space *);
 
-    void moveUp();
+    virtual bool moveUp(Space *);
 
-    void moveDown();
+    virtual bool moveDown(Space *);
 
     int getXCoord();
     int getYCoord();

@@ -7,6 +7,7 @@
 #include <iostream>
 
 using std::cout;
+using std::endl;
 
 /*********************************************************************
  * Default constructor. Should not be called
@@ -48,7 +49,7 @@ bool Character::makeMove() {
             break;
         default:
             //just in case
-            cout << "ERROR: Could not read the ant's direction!";
+            cout << "ERROR: Could not read the characters's direction!";
     }
     return false;
 };
@@ -56,57 +57,72 @@ bool Character::makeMove() {
 /*********************************************************************
  * Moves character left
  ********************************************************************/
-void Character::moveLeft() {
-    XCoord--;
+bool Character::moveLeft(Space *characterSpace) {
+    if (characterSpace->getLeft() != nullptr && characterSpace->getLeft()->isPermiable()) {
+        XCoord--;
+        return true;
+    }
+    return false;
 }
 
 /*********************************************************************
  * Moves character right
  ********************************************************************/
-void Character::moveRight() {
-    XCoord++;
+bool Character::moveRight(Space *characterSpace) {
+    if (characterSpace->getRight() != nullptr && characterSpace->getRight()->isPermiable()) {
+        XCoord++;
+        return true;
+    }
+    return false;
 }
 
 /*********************************************************************
  * Moves character up
  ********************************************************************/
-void Character::moveUp() {
-    // inverted
-    YCoord--;
+bool Character::moveUp(Space *characterSpace) {
+    if (characterSpace->getTop() != nullptr && characterSpace->getTop()->isPermiable()) {
+        //inverted
+        YCoord--;
+        return true;
+    }
+    return false;
 }
 
 /*********************************************************************
  * Moves character down
  ********************************************************************/
-void Character::moveDown() {
-    // inverted
-    YCoord++;
+bool Character::moveDown(Space *characterSpace) {
+    if (characterSpace->getBottom() != nullptr && characterSpace->getBottom()->isPermiable()) {
+        YCoord++;
+        return true;
+    }
+    return false;
 }
 
 /*********************************************************************
  * Returns the character's x-coordinate
  ********************************************************************/
-int Character::getXCoord(){
+int Character::getXCoord() {
     return XCoord;
 }
 
 /*********************************************************************
  * Returns the character's y-coordinate
  ********************************************************************/
-int Character::getYCoord(){
+int Character::getYCoord() {
     return YCoord;
 }
 
 /*********************************************************************
  * Sets the character's x-coordinate
  ********************************************************************/
-int Character::setXCoord(int XCoord){
+int Character::setXCoord(int XCoord) {
     this->XCoord = XCoord;
 }
 
 /*********************************************************************
  * sets the character's y-coordinate
  ********************************************************************/
-int Character::setYCoord(int YCoord){
+int Character::setYCoord(int YCoord) {
     this->YCoord = YCoord;
 }

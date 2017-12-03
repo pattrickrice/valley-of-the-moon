@@ -14,7 +14,6 @@ private:
     int width;
     Player player;
     string startingMap;
-//    Space *board;
 
 public:
     GamePlay();

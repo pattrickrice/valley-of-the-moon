@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include "gamePlay.hpp"
 #include "utilities.hpp"
+using std::cout;
+using std::endl;
 
 /*********************************************************************
  * Default constructor
@@ -62,12 +64,25 @@ GamePlay::GamePlay(int width, string fileName, Player player){
 void GamePlay::play(){
     Map map(this->startingMap);
     bool moved = true;
+    char move = ' ';
+    Space * playerSpace;
     map.printMap(player.getXCoord(), player.getYCoord());
 
-    while (moved) {
+
+    int size = 5;
+    char acceptable[size] = {'a', 's', 'd', 'w', 'e'};
+//    cout << "The player's space contains: " << playerSpace->getValue() << endl;
+
+
+    while (move != 'e') {
         // takes a,s,d,w
-        moved = player.makeMove();
-        map.getSpace(player.getXCoord(), player.getYCoord());
+        playerSpace = map.getSpace(player.getXCoord(), player.getYCoord());
+
+        cout << "a = left, s = down, d = right, w = up, e = exit" << endl;
+        cout << "Enter move: ";
+
+        move = getCharacterNoReturn(acceptable, size);
+        player.makeMove(move, playerSpace);
         system("clear");
         map.printMap(player.getXCoord(), player.getYCoord());
     }

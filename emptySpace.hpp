@@ -10,7 +10,6 @@
 
 class EmptySpace : public Space {
 private:
-    int money;
 public:
     EmptySpace();
 
