@@ -4,6 +4,7 @@
  * Description: Implementation file for the wallSpace class
 *********************************************************************/
 #include "wallSpace.hpp"
+
 WallSpace::WallSpace() = default;
 
 /*********************************************************************
@@ -16,17 +17,20 @@ WallSpace::WallSpace() = default;
  * @param bottom is the bottom space pointer.
  ********************************************************************/
 WallSpace::WallSpace(char value,
-                       Space *top,
-                       Space *left,
-                       Space *right,
-                       Space *bottom) : Space(WALL,
-                                              false,
-                                              value,
-                                              top,
-                                              left,
-                                              right,
-                                              bottom) {
+                     Space *top,
+                     Space *left,
+                     Space *right,
+                     Space *bottom,
+                     MapState mapState) : Space(WALL,
+                                                false,
+                                                value,
+                                                top,
+                                                left,
+                                                right,
+                                                bottom,
+                                                mapState) {
 }
-void WallSpace::printMessage(){
+
+void WallSpace::printMessage() {
 
 }

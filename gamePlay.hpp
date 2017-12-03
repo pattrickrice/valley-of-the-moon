@@ -14,15 +14,16 @@ private:
     int width;
     Player player;
     string startingMap;
+    MapState mapState;
 
 public:
     GamePlay();
 
     GamePlay(int);
 
-    GamePlay(int, string);
+    GamePlay(int, string, MapState);
 
-    GamePlay(int, string, Player);
+    GamePlay(int, string, MapState, Player);
 
     void play();
 

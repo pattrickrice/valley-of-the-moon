@@ -8,6 +8,7 @@
 
 #include "character.hpp"
 #include "space.hpp"
+#include "map.hpp"
 
 class Player : public Character {
 private:
@@ -16,16 +17,15 @@ public:
 
     Player(int XCoord, int YCoord);
 
-    bool makeMove(char, Space *);
+    MapState makeMove(char, Space *);
 
-    bool moveUp(Space *);
-    bool moveRight(Space *);
-    bool moveLeft(Space *);
-    bool moveDown(Space *);
+    MapState moveUp(Space *);
 
+    MapState moveRight(Space *);
 
-    //void getUserInput();
+    MapState moveLeft(Space *);
 
+    MapState moveDown(Space *);
 };
 
 

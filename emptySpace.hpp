@@ -17,7 +17,8 @@ public:
                Space *top,
                Space *left,
                Space *right,
-               Space *bottom);
+               Space *bottom,
+               MapState mapState);
 
     void printMessage() override;
 

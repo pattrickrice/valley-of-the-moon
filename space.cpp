@@ -10,7 +10,7 @@
  ********************************************************************/
 Space::Space() {
     this->spaceType = EMPTY;
-    this->permiable = false;
+    this->permeable = false;
     this->value = ' ';
     setTop(nullptr);
     setLeft(nullptr);
@@ -34,14 +34,16 @@ Space::Space(SpaceType spaceType,
              Space *top,
              Space *left,
              Space *right,
-             Space *bottom) {
+             Space *bottom,
+             MapState mapState) {
     this->spaceType = spaceType;
-    this->permiable = permeable;
+    this->permeable = permeable;
     this->value = value;
     setTop(top);
     setLeft(left);
     setBottom(bottom);
     setRight(right);
+    this->mapState = mapState;
 }
 
 /*********************************************************************
@@ -62,7 +64,7 @@ void Space::setSpaceType(SpaceType spaceType) {
  * Returns if the character can move into it.
  ********************************************************************/
 bool Space::canMoveTo() {
-    return this->permiable;
+    return this->permeable;
 }
 
 /*********************************************************************
@@ -143,8 +145,12 @@ char Space::getValue() {
 /*********************************************************************
  * Returns if the space is permiable
  ********************************************************************/
-bool Space::isPermiable(){
-    return permiable;
+bool Space::isPermeable() {
+    return permeable;
+}
+
+MapState Space::getMapState(){
+    return mapState;
 }
 
 /*********************************************************************

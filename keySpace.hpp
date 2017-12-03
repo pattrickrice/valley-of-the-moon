@@ -8,9 +8,12 @@
 #define KEYSPACE_HPP
 
 #include "space.hpp"
+#include <string>
+using std::string;
 
 
 class KeySpace : public Space {
+    string key;
 public:
     KeySpace();
 
@@ -18,7 +21,8 @@ public:
              Space *top,
              Space *left,
              Space *right,
-             Space *bottom);
+             Space *bottom,
+             MapState mapState);
 
     void printMessage() override ;
 

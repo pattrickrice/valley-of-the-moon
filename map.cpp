@@ -26,9 +26,9 @@ Map::Map() {
  * Constructor taking the name of the file.
  * @param filename is the name of the map file.
 *********************************************************************/
-Map::Map(string filename) {
+Map::Map(string filename, MapState mapState) {
     this->boardHead = nullptr;
-    importBoard(filename);
+    importBoard(filename, mapState);
 }
 
 /*********************************************************************
@@ -36,7 +36,7 @@ Map::Map(string filename) {
  * information.
  * @param fileName is the name of the file.
 *********************************************************************/
-bool Map::importBoard(string fileName) {
+bool Map::importBoard(string fileName, MapState mapState) {
     fstream fileStream;
     int width = 0, height = 0, maxWidth = 0;
     char readChar;
@@ -137,10 +137,11 @@ bool Map::importBoard(string fileName) {
             if (boardHead != nullptr && width != 0) {
                 current->setRight(this->setSpace(
                         readChar,
-                        tempUp,
+                        tempUp->getRight(),
                         current,
                         nullptr,
-                        nullptr));
+                        nullptr,
+                        mapState));
 
                 if (height != 0) {
                     tempUp->getRight()->setBottom(current->getRight());
@@ -152,14 +153,16 @@ bool Map::importBoard(string fileName) {
                         current,
                         nullptr,
                         nullptr,
-                        nullptr));
+                        nullptr,
+                        mapState));
             } else {
                 current = this->setSpace(
                         readChar,
                         nullptr,
                         nullptr,
                         nullptr,
-                        nullptr);
+                        nullptr,
+                        mapState);
                 boardHead = current;
             }
 
@@ -190,6 +193,11 @@ bool Map::importBoard(string fileName) {
     return true;
 }
 
+/*********************************************************************
+ * Prints the map to the screen.
+ * @param XCoord is the players XCoordinate
+ * @param YCoord is the players YCoordinate
+*********************************************************************/
 void Map::printMap(int XCoord, int YCoord) {
     int x = 0, y = 0;
     string print;
@@ -240,7 +248,8 @@ Space *Map::setSpace(char value,
                      Space *top,
                      Space *left,
                      Space *right,
-                     Space *bottom) {
+                     Space *bottom,
+                     MapState mapState) {
     Space *newTile;
     EmptySpace *newEmpty;
     WallSpace *newWall;
@@ -254,7 +263,8 @@ Space *Map::setSpace(char value,
                                       top,
                                       left,
                                       right,
-                                      bottom);
+                                      bottom,
+                                      mapState);
             newTile = newEmpty;
             break;
         case '-':
@@ -265,7 +275,8 @@ Space *Map::setSpace(char value,
                                     top,
                                     left,
                                     right,
-                                    bottom);
+                                    bottom,
+                                    mapState);
             newTile = newWall;
             break;
         case 'K':
@@ -273,7 +284,8 @@ Space *Map::setSpace(char value,
                                   top,
                                   left,
                                   right,
-                                  bottom);
+                                  bottom,
+                                  mapState);
             newTile = newKey;
             break;
         case 'D':
@@ -281,7 +293,8 @@ Space *Map::setSpace(char value,
                                     top,
                                     left,
                                     right,
-                                    bottom);
+                                    bottom,
+                                    mapState);
             newTile = newDoor;
             break;
 
@@ -290,7 +303,8 @@ Space *Map::setSpace(char value,
                                      top,
                                      left,
                                      right,
-                                     bottom);
+                                     bottom,
+                                     mapState);
     }
 
     return newTile;

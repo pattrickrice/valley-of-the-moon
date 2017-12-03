@@ -20,13 +20,15 @@ KeySpace::KeySpace(char value,
                    Space *top,
                    Space *left,
                    Space *right,
-                   Space *bottom) : Space(DOOR,
-                                          true,
-                                          value,
-                                          top,
-                                          left,
-                                          right,
-                                          bottom) {
+                   Space *bottom,
+                   MapState mapState) : Space(KEY,
+                                              true,
+                                              value,
+                                              top,
+                                              left,
+                                              right,
+                                              bottom,
+                                              mapState) {
 }
 
 void KeySpace::printMessage() {

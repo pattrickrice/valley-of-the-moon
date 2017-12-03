@@ -4,6 +4,7 @@
  * Description: Implementation file for the DoorSpace class
 *********************************************************************/
 #include "doorSpace.hpp"
+
 DoorSpace::DoorSpace() = default;
 
 /*********************************************************************
@@ -16,16 +17,18 @@ DoorSpace::DoorSpace() = default;
  * @param bottom is the bottom space pointer.
  ********************************************************************/
 DoorSpace::DoorSpace(char value,
-                       Space *top,
-                       Space *left,
-                       Space *right,
-                       Space *bottom) : Space(DOOR,
-                                              true,
-                                              value,
-                                              top,
-                                              left,
-                                              right,
-                                              bottom) {
+                     Space *top,
+                     Space *left,
+                     Space *right,
+                     Space *bottom,
+                     MapState mapState) : Space(DOOR,
+                                                true,
+                                                value,
+                                                top,
+                                                left,
+                                                right,
+                                                bottom,
+                                                mapState) {
 }
 
-void DoorSpace::printMessage(){}
+void DoorSpace::printMessage() {}

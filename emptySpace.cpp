@@ -20,14 +20,17 @@ EmptySpace::EmptySpace(char value,
                        Space *top,
                        Space *left,
                        Space *right,
-                       Space *bottom) : Space(EMPTY,
-                                              true,
-                                              value,
-                                              top,
-                                              left,
-                                              right,
-                                              bottom) {
+                       Space *bottom,
+                       MapState mapState) : Space(EMPTY,
+                                                  true,
+                                                  value,
+                                                  top,
+                                                  left,
+                                                  right,
+                                                  bottom,
+                                                  mapState) {
 }
-void EmptySpace::printMessage(){}
+
+void EmptySpace::printMessage() {}
 
 

@@ -17,12 +17,12 @@ private:
     int boardSizeX;
     int boardSizeY;
 
-    bool importBoard(string filename);
+    bool importBoard(string filename, MapState mapState);
 
 public:
     Map();
 
-    Map(string filename);
+    Map(string filename, MapState mapState);
 
     Space *getBoardHead();
 
@@ -34,7 +34,8 @@ public:
                     Space *,
                     Space *,
                     Space *,
-                    Space *);
+                    Space *,
+                    MapState);
 
     void printMap(int XCoord, int YCoord);
 

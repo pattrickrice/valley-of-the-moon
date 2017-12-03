@@ -11,6 +11,10 @@ enum SpaceType {
     EMPTY, WALL, DOOR, KEY,
 };
 
+enum MapState {
+    HOUSE, VALLEY, FOREST, LAKE, RANCH, CASTLE, EXIT
+};
+
 class Space {
     Space *top;
     Space *right;
@@ -18,8 +22,9 @@ class Space {
     Space *bottom;
 
     SpaceType spaceType;
-    bool permiable;
+    bool permeable;
     char value;
+    MapState mapState;
 
 public:
     Space();
@@ -30,7 +35,8 @@ public:
           Space *,
           Space *,
           Space *,
-          Space *);
+          Space *,
+          MapState);
 
     SpaceType getSpaceType();
 
@@ -58,10 +64,12 @@ public:
 
     char getValue();
 
-    bool isPermiable();
+    bool isPermeable();
 
     virtual void printMessage() = 0;
-    
+
+    MapState getMapState();
+
     virtual ~Space();
 };
 

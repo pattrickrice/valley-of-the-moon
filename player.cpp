@@ -21,9 +21,11 @@ Player::Player() : Character(0, 0){}
 Player::Player(int XCoord, int YCoord) : Character(XCoord, YCoord){}
 
 /*********************************************************************
- *
+ * Takes the input of the player and moves the player.
+ * @param move is the move from the input
+ * @param playerSpace is the space the player occupies
 *********************************************************************/
-bool Player::makeMove(char move, Space * playerSpace){
+MapState Player::makeMove(char move, Space * playerSpace){
 
     switch (move){
         //D-pad controller
@@ -42,29 +44,29 @@ bool Player::makeMove(char move, Space * playerSpace){
         default:
             //TODO
             //invalid input;
-            return false;
+            return HOUSE;
     }
-    return true;
+    return HOUSE;
 };
 
 /*********************************************************************
  * Moves character left
  ********************************************************************/
-bool Player::moveLeft(Space *playerSpace) {
+MapState Player::moveLeft(Space *playerSpace) {
     return Character::moveLeft(playerSpace);
 }
 
 /*********************************************************************
  * Moves character right
  ********************************************************************/
-bool Player::moveRight(Space *playerSpace) {
+MapState Player::moveRight(Space *playerSpace) {
     return Character::moveRight(playerSpace);
 }
 
 /*********************************************************************
  * Moves character up
  ********************************************************************/
-bool Player::moveUp(Space *playerSpace) {
+MapState Player::moveUp(Space *playerSpace) {
     // inverted
     return Character::moveUp(playerSpace);
 }
@@ -72,7 +74,7 @@ bool Player::moveUp(Space *playerSpace) {
 /*********************************************************************
  * Moves character down
  ********************************************************************/
-bool Player::moveDown(Space *playerSpace) {
+MapState Player::moveDown(Space *playerSpace) {
     // inverted
     return Character::moveDown(playerSpace);
 }

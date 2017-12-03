@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include "gamePlay.hpp"
 #include "utilities.hpp"
+
 using std::cout;
 using std::endl;
 
@@ -17,6 +18,7 @@ GamePlay::GamePlay() {
     this->player = player;
     this->width = 90;
     this->startingMap = "houseMap.txt";
+    this->mapState = HOUSE;
 }
 
 /*********************************************************************
@@ -25,7 +27,6 @@ GamePlay::GamePlay() {
 *********************************************************************/
 GamePlay::GamePlay(int width) {
     Player player(0, 0);
-    Map map("houseMap.txt");
     this->player = player;
     this->width = width;
     this->startingMap = "houseMap.txt";
@@ -36,11 +37,12 @@ GamePlay::GamePlay(int width) {
  * @param width is the width of the console output
  * @param fileName the of the map
 *********************************************************************/
-GamePlay::GamePlay(int width, string fileName){
+GamePlay::GamePlay(int width, string fileName, MapState mapState) {
     Player player(0, 0);
     this->player = player;
     this->width = width;
     this->startingMap = fileName;
+    this->mapState = mapState;
 }
 
 /*********************************************************************
@@ -50,43 +52,62 @@ GamePlay::GamePlay(int width, string fileName){
  * @param player is the player object and can include starting
  * information such as its initial position.
 *********************************************************************/
-GamePlay::GamePlay(int width, string fileName, Player player){
-    Map map(fileName);
+GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player) {
     this->player = player;
     this->width = width;
     this->startingMap = fileName;
+    this->mapState = mapState;
 }
 
 /*********************************************************************
  * Contains the game play for th game. Continues until the player
  * chooses to exit the game.
 *********************************************************************/
-void GamePlay::play(){
-    Map map(this->startingMap);
-    bool moved = true;
+void GamePlay::play() {
+    Map house("houseMap.txt", HOUSE);
+    MapState mapState = HOUSE;
     char move = ' ';
-    Space * playerSpace;
-    map.printMap(player.getXCoord(), player.getYCoord());
-
-
+    Space *playerSpace;
     int size = 5;
     char acceptable[size] = {'a', 's', 'd', 'w', 'e'};
-//    cout << "The player's space contains: " << playerSpace->getValue() << endl;
+
+    string instructions = "a = left, s = down, d = right, w = up, e = exit \n";
+    instructions += "Enter move: ";
 
 
-    while (move != 'e') {
+    while (move != 'e' && mapState != EXIT) {
         // takes a,s,d,w
-        playerSpace = map.getSpace(player.getXCoord(), player.getYCoord());
 
-        cout << "a = left, s = down, d = right, w = up, e = exit" << endl;
-        cout << "Enter move: ";
+        switch (mapState) {
+            case HOUSE:
+                playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
+                house.printMap(player.getXCoord(), player.getYCoord());
 
+                break;
+            case VALLEY:
+                break;
+            case FOREST:
+                break;
+            case LAKE:
+                break;
+            case RANCH:
+                break;
+            case CASTLE:
+                break;
+            default:
+                playerSpace = house.getSpace(1, 1);
+                house.printMap(player.getXCoord(), player.getYCoord());
+                cout << "[ERROR] in MapState in GamePlay.cpp" << endl;
+        };
+
+        cout << instructions;
         move = getCharacterNoReturn(acceptable, size);
         player.makeMove(move, playerSpace);
         system("clear");
-        map.printMap(player.getXCoord(), player.getYCoord());
     }
 }
+
+
 
 
 

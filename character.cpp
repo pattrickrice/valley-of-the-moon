@@ -57,46 +57,46 @@ bool Character::makeMove() {
 /*********************************************************************
  * Moves character left
  ********************************************************************/
-bool Character::moveLeft(Space *characterSpace) {
-    if (characterSpace->getLeft() != nullptr && characterSpace->getLeft()->isPermiable()) {
+MapState Character::moveLeft(Space *characterSpace) {
+    if (characterSpace->getLeft() != nullptr && characterSpace->getLeft()->isPermeable()) {
         XCoord--;
-        return true;
+        return characterSpace->getLeft()->getMapState();
     }
-    return false;
+    return characterSpace->getMapState();
 }
 
 /*********************************************************************
  * Moves character right
  ********************************************************************/
-bool Character::moveRight(Space *characterSpace) {
-    if (characterSpace->getRight() != nullptr && characterSpace->getRight()->isPermiable()) {
+MapState Character::moveRight(Space *characterSpace) {
+    if (characterSpace->getRight() != nullptr && characterSpace->getRight()->isPermeable()) {
         XCoord++;
-        return true;
+        return characterSpace->getRight()->getMapState();
     }
-    return false;
+    return characterSpace->getMapState();
 }
 
 /*********************************************************************
  * Moves character up
  ********************************************************************/
-bool Character::moveUp(Space *characterSpace) {
-    if (characterSpace->getTop() != nullptr && characterSpace->getTop()->isPermiable()) {
+MapState Character::moveUp(Space *characterSpace) {
+    if (characterSpace->getTop() != nullptr && characterSpace->getTop()->isPermeable()) {
         //inverted
         YCoord--;
-        return true;
+        return characterSpace->getTop()->getMapState();
     }
-    return false;
+    return characterSpace->getMapState();
 }
 
 /*********************************************************************
  * Moves character down
  ********************************************************************/
-bool Character::moveDown(Space *characterSpace) {
-    if (characterSpace->getBottom() != nullptr && characterSpace->getBottom()->isPermiable()) {
+MapState Character::moveDown(Space *characterSpace) {
+    if (characterSpace->getBottom() != nullptr && characterSpace->getBottom()->isPermeable()) {
         YCoord++;
-        return true;
+        return characterSpace->getBottom()->getMapState();
     }
-    return false;
+    return characterSpace->getMapState();
 }
 
 /*********************************************************************
