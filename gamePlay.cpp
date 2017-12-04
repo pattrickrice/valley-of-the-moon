@@ -7,6 +7,7 @@
 #include "gamePlay.hpp"
 #include "utilities.hpp"
 #include "keySpace.hpp"
+#include "doorSpace.hpp"
 #include <vector>
 
 using std::cout;
@@ -67,13 +68,17 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player)
  * chooses to exit the game.
 *********************************************************************/
 void GamePlay::play() {
-    Map house("houseMap.txt", "houseKeys.txt", HOUSE);
+    Map map();
+    Map house("houseMap.txt", "houseKeys.txt", "houseDoorKeys.txt", HOUSE);
+    Map valley("valley.txt", "valleyKeys.txt", "valleyDoorKeys.txt", VALLEY);
     MapState mapState = HOUSE;
     Space *playerSpace;
     player.setXCoord(house.getPlayerStartingX());
     player.setYCoord(house.getPlayerStartingY());
-    char move = ' ';
+    char move = ' ', doorID = ' ';
+    bool passedThroughDoor = false;
     KeySpace *keySpace;
+    DoorSpace *doorSpace;
     string newKey;
     int size = 5;
     char acceptable[size] = {'a', 's', 'd', 'w', 'e'};
@@ -81,17 +86,24 @@ void GamePlay::play() {
     string instructions = "a = left, s = down, d = right, w = up, e = exit \n";
     instructions += "Enter move: ";
 
-
+    playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
+    house.printMap(player.getXCoord(), player.getYCoord());
     while (move != 'e' && mapState != EXIT) {
         // takes a,s,d,w
+        cout << instructions;
+        move = getCharacterNoReturn(acceptable, size);
+        player.makeMove(move, playerSpace);
+        system("clear");
 
         switch (mapState) {
             case HOUSE:
                 playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
                 house.printMap(player.getXCoord(), player.getYCoord());
-
                 break;
             case VALLEY:
+
+                playerSpace = valley.getSpace(player.getXCoord(), player.getYCoord());
+                valley.printMap(player.getXCoord(), player.getYCoord());
                 break;
             case FOREST:
                 break;
@@ -107,18 +119,64 @@ void GamePlay::play() {
                 cout << "[ERROR] in MapState in GamePlay.cpp" << endl;
         };
 
-        if(playerSpace->getSpaceType() == KEY){
-            keySpace = dynamic_cast<KeySpace *>(playerSpace);
-            newKey = keySpace->takeKey();
-            player.pickUpKey(newKey);
-            cout << "You picked up the key: " + newKey + " !" << endl;
+        switch (playerSpace->getSpaceType()) {
+            case KEY:
+                keySpace = dynamic_cast<KeySpace *>(playerSpace);
+                newKey = keySpace->takeKey();
+                player.pickUpKey(newKey);
+                cout << "You picked up the key: " + newKey + " !" << endl;
+                break;
+            case DOOR:
+                doorSpace = dynamic_cast<DoorSpace *>(playerSpace);
+                if (player.hasKey(doorSpace->getKey())) {
+                    mapState = doorSpace->getMapState();
+                    passedThroughDoor = true;
+                    doorID = doorSpace->getDoorID();
+                } else {
+                    cout << "You do not have the required key: "
+                         << doorSpace->getKey() << endl;
+                }
+            default:
+                break;
         }
-        cout << instructions;
-        move = getCharacterNoReturn(acceptable, size);
-        player.makeMove(move, playerSpace);
-        system("clear");
+
+        // move maps
+        if (passedThroughDoor) {
+            system("clear");
+            switch (mapState) {
+                case HOUSE:
+                    // player just entered the map. Find their location
+                    player.setXCoord(house.getDoorXCoord(doorID));
+                    player.setYCoord(house.getDoorYCoord(doorID));
+
+                    playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
+                    house.printMap(player.getXCoord(), player.getYCoord());
+                    break;
+                case VALLEY:
+                    // player just entered the map. Find their location
+                    player.setXCoord(valley.getDoorXCoord(doorID));
+                    player.setYCoord(valley.getDoorYCoord(doorID));
+
+
+                    playerSpace = valley.getSpace(player.getXCoord(), player.getYCoord());
+                    valley.printMap(player.getXCoord(), player.getYCoord());
+                    break;
+                case FOREST:
+                    break;
+                case LAKE:
+                    break;
+                case RANCH:
+                    break;
+                case CASTLE:
+                    break;
+                default:
+                    cout << "[ERROR] in moveMaps in GamePlay.cpp" << endl;
+            };
+            passedThroughDoor = false;
+        }
     }
 }
+
 
 
 

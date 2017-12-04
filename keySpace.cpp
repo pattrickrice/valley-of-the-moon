@@ -44,7 +44,7 @@ string KeySpace::getKey(){
  * Returns if the user has taken the key.
  ********************************************************************/
 bool KeySpace::isKeyPresent(){
-    keyPresent;
+    return this->keyPresent;
 }
 
 /*********************************************************************

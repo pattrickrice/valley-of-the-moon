@@ -38,8 +38,8 @@ public:
 
     int getXCoord();
     int getYCoord();
-    int setXCoord(int);
-    int setYCoord(int);
+    void setXCoord(int);
+    void setYCoord(int);
 };
 
 

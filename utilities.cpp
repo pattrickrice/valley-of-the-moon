@@ -195,7 +195,6 @@ char getCharacterWithReturn(char acceptable[], int size) {
 *********************************************************************/
 char getCharacterNoReturn(char acceptable[], int size) {
     bool valid = false;
-    unsigned int containsInt = 0;
     string userInput;
     string output;
 

@@ -21,34 +21,79 @@ using std::cout;
 Map::Map() {
     this->boardHead = nullptr;
     this->keyCounter = 0;
+    this->doorCounter = 0;
 }
 
 /*********************************************************************
  * Constructor taking the name of the file.
- * @param filename is the name of the map file.
+ * @param mapFileName is the name of the map file.
+ * @param keyFileName is the name of the keys file.
+ * @param doorFileName is the name of the locks for the doors file.
+ * @param mapState is the state the map is in.
 *********************************************************************/
-Map::Map(string mapFileName, string keyFileName, MapState mapState) {
-    this->keyCounter = 0;
+Map::Map(string mapFileName, string keyFileName, string doorFileName, MapState mapState) {
+    this->keyCounter = this->doorCounter = 0;
+
     this->boardHead = nullptr;
-    importKeys(keyFileName);
+    keys = importKeys(keyFileName);
+    doors = importDoors(doorFileName);
     importBoard(mapFileName, mapState);
 }
 
-bool Map::importKeys(string keyFileName) {
+/*********************************************************************
+ * Reads the text file and creates a key vector
+ * @param doorFileName is the name of the file.
+*********************************************************************/
+vector<string> Map::importKeys(string keyFileName) {
     fstream fileStream;
     string readKey;
     fileStream.open(keyFileName);
+    vector<string> read;
 
     // could not open
     if (fileStream.fail()) {
         cout << "[ERROR] Could not open " + keyFileName << endl;
-        return false;
     } else {
         while (fileStream >> keyFileName) {
-            keys.push_back(keyFileName);
+            read.push_back(keyFileName);
         }
     }
     fileStream.close();
+    return read;
+}
+
+/*********************************************************************
+ * Reads the text file and creates a door vector
+ * @param doorFileName is the name of the file.
+*********************************************************************/
+vector<Map::Door> Map::importDoors(string doorFileName) {
+    fstream fileStream;
+    string keyID;
+    char mapID;
+    char doorID;
+    MapState mapState;
+    Map::Door readDoor;
+    fileStream.open(doorFileName);
+    vector<Map::Door> read;
+
+    // could not open
+    if (fileStream.fail()) {
+        cout << "[ERROR] Could not open " + doorFileName << endl;
+    } else {
+        while (fileStream >> keyID) {
+            fileStream >> mapID;
+            fileStream >> doorID;
+
+            readDoor.key = keyID;
+            mapState = getDoorMapState(mapID);
+            readDoor.doorway = mapState;
+            readDoor.doorID = doorID;
+
+            read.push_back(readDoor);
+        }
+    }
+    fileStream.close();
+    return read;
 }
 
 /*********************************************************************
@@ -162,7 +207,7 @@ bool Map::importBoard(string fileName, MapState mapState) {
                         nullptr,
                         nullptr,
                         mapState,
-                width, height));
+                        width, height));
 
                 if (height != 0) {
                     tempUp->getRight()->setBottom(current->getRight());
@@ -268,6 +313,9 @@ void Map::printMap(int XCoord, int YCoord) {
  * @param left is the left space pointer.
  * @param right is the right space pointer.
  * @param bottom is the bottom space pointer.
+ * @param mapState is the mapState the space has
+ * @param currentX is the current XCoord of the board
+ * @param currentY is the current YCoord of the board
 *********************************************************************/
 Space *Map::setSpace(char value,
                      Space *top,
@@ -282,6 +330,10 @@ Space *Map::setSpace(char value,
     WallSpace *newWall;
     KeySpace *newKey;
     DoorSpace *newDoor;
+
+    string doorKey;
+
+    DoorLocation doorLocation;
 
     // create space based on value
     switch (value) {
@@ -321,12 +373,23 @@ Space *Map::setSpace(char value,
             newTile = newKey;
             break;
         case 'D':
+            doorLocation.doorID = doors.at(doorCounter).doorID;
+            doorLocation.XCoord = currentX;
+            doorLocation.YCoord = currentY;
+
+            doorLocator.push_back(doorLocation);
+
             newDoor = new DoorSpace(value,
                                     top,
                                     left,
                                     right,
                                     bottom,
-                                    mapState);
+                                    doors.at(doorCounter).key,
+                                    doors.at(doorCounter).doorway,
+                                    doors.at(doorCounter).doorID,
+                                    currentX,
+                                    currentY);
+            doorCounter++;
             newTile = newDoor;
             break;
 
@@ -380,18 +443,69 @@ Space *Map::getSpace(int XCoord, int YCoord) {
         } while (current != nullptr);
     }
     cout << "[ERROR] Did not find player" << endl;
-
+    return nullptr;
 }
 
-int Map::getPlayerStartingX(){
+/*********************************************************************
+ * Returns a mapState based on character input
+ * @param mapStateID is the input
+*********************************************************************/
+MapState Map::getDoorMapState(char mapStateID) {
+    switch (mapStateID) {
+        case 'H':
+            return HOUSE;
+        case 'V':
+            return VALLEY;
+        case 'L':
+            return LAKE;
+        case 'R':
+            return RANCH;
+        case 'C':
+            return CASTLE;
+        default:
+            return HOUSE;
+    }
+}
+
+/*********************************************************************
+ * Returns the players starting position X-coordinate
+*********************************************************************/
+int Map::getPlayerStartingX() {
     return playerStartingX;
 }
 
-int Map::getPlayerStartingY(){
+/*********************************************************************
+ * Returns the players starting position Y-coordinate
+*********************************************************************/
+int Map::getPlayerStartingY() {
     return playerStartingY;
 }
 
+/*********************************************************************
+ * Returns a doors X-coordinate
+ * @param inputDoorID is the door we are looking for
+*********************************************************************/
+int Map::getDoorXCoord(char inputDoorID){
+    for (unsigned int i = 0; i < doorLocator.size(); ++i) {
+        if(doorLocator.at(i).doorID == inputDoorID){
+            return doorLocator.at(i).XCoord;
+        }
+    }
+    return 0;
+}
 
+/*********************************************************************
+ * Returns a doors Y-coordinate
+ * @param inputDoorID is the door we are looking for
+*********************************************************************/
+int Map::getDoorYCoord(char inputDoorID){
+    for (unsigned int i = 0; i < doorLocator.size(); ++i) {
+        if(doorLocator.at(i).doorID == inputDoorID){
+            return doorLocator.at(i).YCoord;
+        }
+    }
+    return 0;
+}
 
 /*********************************************************************
  * Returns the board pointer

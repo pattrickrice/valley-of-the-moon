@@ -116,13 +116,13 @@ int Character::getYCoord() {
 /*********************************************************************
  * Sets the character's x-coordinate
  ********************************************************************/
-int Character::setXCoord(int XCoord) {
+void Character::setXCoord(int XCoord) {
     this->XCoord = XCoord;
 }
 
 /*********************************************************************
  * sets the character's y-coordinate
  ********************************************************************/
-int Character::setYCoord(int YCoord) {
+void Character::setYCoord(int YCoord) {
     this->YCoord = YCoord;
 }

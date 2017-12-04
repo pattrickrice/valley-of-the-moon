@@ -21,14 +21,51 @@ DoorSpace::DoorSpace(char value,
                      Space *left,
                      Space *right,
                      Space *bottom,
-                     MapState mapState) : Space(DOOR,
-                                                true,
-                                                value,
-                                                top,
-                                                left,
-                                                right,
-                                                bottom,
-                                                mapState) {
+                     string key,
+                     MapState mapState,
+                     char doorID,
+                     int XCoord,
+                     int YCoord) : Space(DOOR,
+                                         true,
+                                         value,
+                                         top,
+                                         left,
+                                         right,
+                                         bottom,
+                                         mapState) {
+    this->key = key;
+    this->doorID = doorID;
+    this->XCoord = XCoord;
+    this->YCoord = YCoord;
 }
 
 void DoorSpace::printMessage() {}
+
+
+/********************************************************************
+* Returns the door's required key
+********************************************************************/
+string DoorSpace::getKey() {
+    return this->key;
+}
+
+/********************************************************************
+* Returns the door's ID
+********************************************************************/
+char DoorSpace::getDoorID() {
+    return this->doorID;
+}
+
+/********************************************************************
+* Returns the door's X-coordinate
+********************************************************************/
+int DoorSpace::getXCoord() {
+    return this->XCoord;
+}
+
+/********************************************************************
+* Returns the door's Y-coordinate
+********************************************************************/
+int DoorSpace::getYCoord() {
+    return this->YCoord;
+}

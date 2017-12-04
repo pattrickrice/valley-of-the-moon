@@ -20,7 +20,8 @@ int main() {
     seed = static_cast<unsigned int>(time(nullptr));
     srand(seed);
 
-    int width = 90, mainMenuChoice = 0;
+    int width = 90;
+//    mainMenuChoice = 0;
 
 
     printBoldCenterTitle("Valley of the Moon", width);

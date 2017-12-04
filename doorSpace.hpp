@@ -6,24 +6,43 @@
 #ifndef DOORSPACE_HPP
 #define DOORSPACE_HPP
 
+#include <string>
 #include "space.hpp"
 
+using std::string;
+
+
 class DoorSpace : public Space {
+    string key;
+    char doorID;
+    int XCoord;
+    int YCoord;
 public:
     DoorSpace();
 
     DoorSpace(char value,
+              Space *top,
+              Space *left,
+              Space *right,
+              Space *bottom,
+              string key,
+              MapState mapState,
+              char doorID,
+              int XCoord,
+              int YCoord
+    );
 
-              Space * top,
-              Space * left,
-              Space * right,
-              Space * bottom,
-              MapState mapState);
+    string getKey();
 
-    void printMessage() override ;
+    char getDoorID();
 
-    ~DoorSpace()
-    {
+    int getXCoord();
+
+    int getYCoord();
+
+    void printMessage() override;
+
+    ~DoorSpace() {
         // Do some important cleanup
     }
 
