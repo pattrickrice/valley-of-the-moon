@@ -12,7 +12,7 @@ enum SpaceType {
 };
 
 enum MapState {
-    HOUSE, VALLEY, FOREST, LAKE, RANCH, CASTLE, EXIT
+    HOUSE, VALLEY, FOREST, DEEPFOREST, LAKE, RANCH, CASTLE, EXIT
 };
 
 class Space {

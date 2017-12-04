@@ -71,6 +71,8 @@ void GamePlay::play() {
     Map map();
     Map house("houseMap.txt", "houseKeys.txt", "houseDoorKeys.txt", HOUSE);
     Map valley("valley.txt", "valleyKeys.txt", "valleyDoorKeys.txt", VALLEY);
+    Map forest("forest.txt", "forestKeys.txt", "forestDoorKeys.txt", FOREST);
+    Map deepForrest("deepForest.txt", "deepForestKeys.txt", "deepForestDoorKeys.txt", FOREST);
     MapState mapState = HOUSE;
     Space *playerSpace;
     player.setXCoord(house.getPlayerStartingX());
@@ -106,6 +108,12 @@ void GamePlay::play() {
                 valley.printMap(player.getXCoord(), player.getYCoord());
                 break;
             case FOREST:
+                playerSpace = forest.getSpace(player.getXCoord(), player.getYCoord());
+                forest.printMap(player.getXCoord(), player.getYCoord());
+                break;
+            case DEEPFOREST:
+                playerSpace = deepForrest.getSpace(player.getXCoord(), player.getYCoord());
+                deepForrest.printMap(player.getXCoord(), player.getYCoord());
                 break;
             case LAKE:
                 break;
@@ -162,6 +170,22 @@ void GamePlay::play() {
                     valley.printMap(player.getXCoord(), player.getYCoord());
                     break;
                 case FOREST:
+                    // player just entered the map. Find their location
+                    player.setXCoord(forest.getDoorXCoord(doorID));
+                    player.setYCoord(forest.getDoorYCoord(doorID));
+
+
+                    playerSpace = forest.getSpace(player.getXCoord(), player.getYCoord());
+                    forest.printMap(player.getXCoord(), player.getYCoord());
+                    break;
+                case DEEPFOREST:
+                    // player just entered the map. Find their location
+                    player.setXCoord(deepForrest.getDoorXCoord(doorID));
+                    player.setYCoord(deepForrest.getDoorYCoord(doorID));
+
+
+                    playerSpace = deepForrest.getSpace(player.getXCoord(), player.getYCoord());
+                    deepForrest.printMap(player.getXCoord(), player.getYCoord());
                     break;
                 case LAKE:
                     break;

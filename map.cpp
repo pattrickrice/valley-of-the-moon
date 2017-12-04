@@ -353,6 +353,7 @@ Space *Map::setSpace(char value,
         case '\\':
         case '+':
         case '_':
+        case 'N':
             newWall = new WallSpace(value,
                                     top,
                                     left,
@@ -454,6 +455,10 @@ MapState Map::getDoorMapState(char mapStateID) {
     switch (mapStateID) {
         case 'H':
             return HOUSE;
+        case 'F':
+            return FOREST;
+        case 'D':
+            return DEEPFOREST;
         case 'V':
             return VALLEY;
         case 'L':
