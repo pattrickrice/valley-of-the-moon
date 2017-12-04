@@ -68,11 +68,15 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player)
  * chooses to exit the game.
 *********************************************************************/
 void GamePlay::play() {
-    Map map();
     Map house("houseMap.txt", "houseKeys.txt", "houseDoorKeys.txt", HOUSE);
     Map valley("valley.txt", "valleyKeys.txt", "valleyDoorKeys.txt", VALLEY);
     Map forest("forest.txt", "forestKeys.txt", "forestDoorKeys.txt", FOREST);
     Map deepForrest("deepForest.txt", "deepForestKeys.txt", "deepForestDoorKeys.txt", FOREST);
+    Map lake("lake.txt", "lakeKeys.txt", "lakeDoorKeys.txt", LAKE);
+//    Map ranch("ranch.txt", "ranchKeys.txt", "ranchDoorKeys.txt", RANCH);
+//    Map castle("castle.txt", "ranchKeysKeys.txt", "ranchDoorKeys.txt", CASTLE);
+
+    Map *map = &house;
     MapState mapState = HOUSE;
     Space *playerSpace;
     player.setXCoord(house.getPlayerStartingX());
@@ -88,6 +92,10 @@ void GamePlay::play() {
     string instructions = "a = left, s = down, d = right, w = up, e = exit \n";
     instructions += "Enter move: ";
 
+    //DEBUG
+//    player.pickUpKey("houseKey");
+//    player.pickUpKey("lakeKey");
+
     playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
     house.printMap(player.getXCoord(), player.getYCoord());
     while (move != 'e' && mapState != EXIT) {
@@ -99,33 +107,33 @@ void GamePlay::play() {
 
         switch (mapState) {
             case HOUSE:
-                playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
-                house.printMap(player.getXCoord(), player.getYCoord());
+                map = &house;
                 break;
             case VALLEY:
-
-                playerSpace = valley.getSpace(player.getXCoord(), player.getYCoord());
-                valley.printMap(player.getXCoord(), player.getYCoord());
+                map = &valley;
                 break;
             case FOREST:
-                playerSpace = forest.getSpace(player.getXCoord(), player.getYCoord());
-                forest.printMap(player.getXCoord(), player.getYCoord());
+                map = &forest;
                 break;
             case DEEPFOREST:
-                playerSpace = deepForrest.getSpace(player.getXCoord(), player.getYCoord());
-                deepForrest.printMap(player.getXCoord(), player.getYCoord());
+                map = &deepForrest;
                 break;
             case LAKE:
+                map = &lake;
                 break;
             case RANCH:
+//                map = &ranch;
                 break;
             case CASTLE:
+//                map = &castle;
                 break;
             default:
-                playerSpace = house.getSpace(1, 1);
-                house.printMap(player.getXCoord(), player.getYCoord());
+                map = &house;
                 cout << "[ERROR] in MapState in GamePlay.cpp" << endl;
         };
+
+        playerSpace = map->getSpace(player.getXCoord(), player.getYCoord());
+        map->printMap(player.getXCoord(), player.getYCoord());
 
         switch (playerSpace->getSpaceType()) {
             case KEY:
@@ -153,49 +161,37 @@ void GamePlay::play() {
             system("clear");
             switch (mapState) {
                 case HOUSE:
-                    // player just entered the map. Find their location
-                    player.setXCoord(house.getDoorXCoord(doorID));
-                    player.setYCoord(house.getDoorYCoord(doorID));
-
-                    playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
-                    house.printMap(player.getXCoord(), player.getYCoord());
+                    map = &house;
                     break;
                 case VALLEY:
-                    // player just entered the map. Find their location
-                    player.setXCoord(valley.getDoorXCoord(doorID));
-                    player.setYCoord(valley.getDoorYCoord(doorID));
-
-
-                    playerSpace = valley.getSpace(player.getXCoord(), player.getYCoord());
-                    valley.printMap(player.getXCoord(), player.getYCoord());
+                    map = &valley;
                     break;
                 case FOREST:
-                    // player just entered the map. Find their location
-                    player.setXCoord(forest.getDoorXCoord(doorID));
-                    player.setYCoord(forest.getDoorYCoord(doorID));
-
-
-                    playerSpace = forest.getSpace(player.getXCoord(), player.getYCoord());
-                    forest.printMap(player.getXCoord(), player.getYCoord());
+                    map = &forest;
                     break;
                 case DEEPFOREST:
-                    // player just entered the map. Find their location
-                    player.setXCoord(deepForrest.getDoorXCoord(doorID));
-                    player.setYCoord(deepForrest.getDoorYCoord(doorID));
-
-
-                    playerSpace = deepForrest.getSpace(player.getXCoord(), player.getYCoord());
-                    deepForrest.printMap(player.getXCoord(), player.getYCoord());
+                    map = &deepForrest;
                     break;
                 case LAKE:
+                    map = &lake;
                     break;
                 case RANCH:
+//                map = &ranch;
                     break;
                 case CASTLE:
+//                map = &castle;
                     break;
                 default:
                     cout << "[ERROR] in moveMaps in GamePlay.cpp" << endl;
             };
+
+            // player just entered the map. Find their location
+            player.setXCoord(map->getDoorXCoord(doorID));
+            player.setYCoord(map->getDoorYCoord(doorID));
+
+            playerSpace = map->getSpace(player.getXCoord(), player.getYCoord());
+            map->printMap(player.getXCoord(), player.getYCoord());
+
             passedThroughDoor = false;
         }
     }
