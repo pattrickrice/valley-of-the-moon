@@ -73,8 +73,8 @@ void GamePlay::play() {
     Map forest("forest.txt", "forestKeys.txt", "forestDoorKeys.txt", FOREST);
     Map deepForrest("deepForest.txt", "deepForestKeys.txt", "deepForestDoorKeys.txt", FOREST);
     Map lake("lake.txt", "lakeKeys.txt", "lakeDoorKeys.txt", LAKE);
-//    Map ranch("ranch.txt", "ranchKeys.txt", "ranchDoorKeys.txt", RANCH);
-//    Map castle("castle.txt", "ranchKeysKeys.txt", "ranchDoorKeys.txt", CASTLE);
+    Map ranch("ranch.txt", "ranchKeys.txt", "ranchDoorKeys.txt", RANCH);
+    Map castle("castle.txt", "castleKeysKeys.txt", "castleDoorKeys.txt", CASTLE);
 
     Map *map = &house;
     MapState mapState = HOUSE;
@@ -93,8 +93,10 @@ void GamePlay::play() {
     instructions += "Enter move: ";
 
     //DEBUG
-//    player.pickUpKey("houseKey");
-//    player.pickUpKey("lakeKey");
+    player.pickUpKey("houseKey");
+    player.pickUpKey("lakeKey");
+    player.pickUpKey("ranchKey");
+    player.pickUpKey("castleKey");
 
     playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
     house.printMap(player.getXCoord(), player.getYCoord());
@@ -122,10 +124,10 @@ void GamePlay::play() {
                 map = &lake;
                 break;
             case RANCH:
-//                map = &ranch;
+                map = &ranch;
                 break;
             case CASTLE:
-//                map = &castle;
+                map = &castle;
                 break;
             default:
                 map = &house;
@@ -176,10 +178,10 @@ void GamePlay::play() {
                     map = &lake;
                     break;
                 case RANCH:
-//                map = &ranch;
+                map = &ranch;
                     break;
                 case CASTLE:
-//                map = &castle;
+                map = &castle;
                     break;
                 default:
                     cout << "[ERROR] in moveMaps in GamePlay.cpp" << endl;
