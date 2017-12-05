@@ -1,5 +1,6 @@
 OJBS = main.o  menu.o utilities.o map.o character.o space.o \
-emptySpace.o wallSpace.o keySpace.o doorSpace.o player.o gamePlay.o
+emptySpace.o wallSpace.o keySpace.o doorSpace.o exitSpace.o \
+characterSpace.o player.o gamePlay.o
 
 CC = g++
 CFLAGS = -c -std=c++0x -Wall
@@ -49,6 +50,14 @@ keySpace.o: keySpace.cpp
 doorSpace.o: doorSpace.cpp
 	@echo '[BUILDING] ... doorSpace'
 	@$(CC) $(CFLAGS) doorSpace.cpp
+
+characterSpace.o: characterSpace.cpp
+	@echo '[BUILDING] ... characterSpace'
+	@$(CC) $(CFLAGS) characterSpace.cpp
+
+exitSpace.o: exitSpace.cpp
+	@echo '[BUILDING] ... exitSpace'
+	@$(CC) $(CFLAGS) exitSpace.cpp 
 
 player.o: player.cpp
 	@echo '[BUILDING] ... player'

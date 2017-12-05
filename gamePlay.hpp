@@ -11,7 +11,7 @@
 
 class GamePlay {
 private:
-    int width;
+    int width, stepCounter, stepsLeft;
     Player player;
     string startingMap;
     MapState mapState;
@@ -35,7 +35,9 @@ public:
 
     void printStartingDialogue(Map*, Player player);
 
+    void printEndingDialogue(Map* map, Player player);
 
-};
+
+    };
 
 #endif

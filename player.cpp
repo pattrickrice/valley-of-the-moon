@@ -27,7 +27,6 @@ Player::Player(int XCoord, int YCoord) : Character(XCoord, YCoord){}
  * @param width is the width of the map
 *********************************************************************/
 bool Player::makeMove(char move, Space * playerSpace, int width){
-
     switch (move){
         //D-pad controller
         case 'a':
@@ -38,6 +37,7 @@ bool Player::makeMove(char move, Space * playerSpace, int width){
             return moveRight(playerSpace, width);
         case 'w':
             return moveUp(playerSpace, width);
+        case 'p':
         default:
             //TODO
             //invalid input;
@@ -70,6 +70,8 @@ void Player::failedMoveReact(char move, Space * playerSpace, int width){
             break;
         case 'e':
             printMessage("Exiting Game", width);
+            break;
+        case 'p':
             break;
         default:
             printMessage("Error", width);

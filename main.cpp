@@ -20,18 +20,32 @@ int main() {
     seed = static_cast<unsigned int>(time(nullptr));
     srand(seed);
 
-    int width = 90;
-//    mainMenuChoice = 0;
+    int width = 90, mainMenuChoice = 0;
 
-
+    system("clear");
     printBoldCenterTitle("Valley of the Moon", width);
     printCenteredString("A text-based adventure game", width);
+    printCenteredString("Please adjust your console to fit this dialogue", width);
     printBorder(width);
 
-    GamePlay gameState;
-    gameState.play();
+    Menu mainMeu("Would you like to play the game?");
+    mainMeu.addOption("Play");
+    mainMeu.addOption("Exit");
 
-    printBoldCenterTitle("Goodbye", width);
+
+    do {
+
+        mainMeu.printMenu();
+        mainMenuChoice = mainMeu.getChoice();
+
+        if (mainMenuChoice == 1) {
+            // play the game
+            GamePlay gameState;
+            gameState.play();
+        }
+
+    } while (mainMenuChoice != 2);
+
 
     return 0;
 }

@@ -14,6 +14,7 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::cin;
+using std::to_string;
 
 /*********************************************************************
  * Default constructor
@@ -22,6 +23,8 @@ GamePlay::GamePlay() {
     Player player(2, 2);
     this->player = player;
     this->width = 90;
+    this->stepCounter = 0;
+    this->stepsLeft = 1500;
     this->startingMap = "houseMap.txt";
     this->mapState = HOUSE;
 }
@@ -34,6 +37,8 @@ GamePlay::GamePlay(int width) {
     Player player(0, 0);
     this->player = player;
     this->width = width;
+    this->stepCounter = 0;
+    this->stepsLeft = 1500;
     this->startingMap = "houseMap.txt";
 }
 
@@ -46,6 +51,8 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState) {
     Player player(0, 0);
     this->player = player;
     this->width = width;
+    this->stepCounter = 0;
+    this->stepsLeft = 1500;
     this->startingMap = fileName;
     this->mapState = mapState;
 }
@@ -62,6 +69,8 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player)
     this->width = width;
     this->startingMap = fileName;
     this->mapState = mapState;
+    this->stepCounter = 0;
+    this->stepsLeft = 1500;
 }
 
 /*********************************************************************
@@ -69,12 +78,24 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player)
  * chooses to exit the game.
 *********************************************************************/
 void GamePlay::play() {
+    char move = ' ', doorID = ' ';
+    bool passedThroughDoor = false;
+    bool couldMove = false, wonGame = false;
+    KeySpace *keySpace;
+    DoorSpace *doorSpace;
+    string newKey;
+
+    // key input instructions
+    int size = 6;
+    char acceptable[size] = {'a', 's', 'd', 'w', 'e', 'p'};
+    string instructions = "a = left, s = down, d = right, w = up, p = print keys, e = exit";
+    string keysList = "You have the following keys: ";
 
     // create all of the maps
     Map house("houseMap.txt", "houseKeys.txt", "houseDoorKeys.txt", HOUSE);
     Map valley("valley.txt", "valleyKeys.txt", "valleyDoorKeys.txt", VALLEY);
     Map forest("forest.txt", "forestKeys.txt", "forestDoorKeys.txt", FOREST);
-    Map deepForrest("deepForest.txt", "deepForestKeys.txt", "deepForestDoorKeys.txt", FOREST);
+    Map deepForrest("deepForest.txt", "deepForestKeys.txt", "deepForestDoorKeys.txt", DEEPFOREST);
     Map lake("lake.txt", "lakeKeys.txt", "lakeDoorKeys.txt", LAKE);
     Map ranch("ranch.txt", "ranchKeys.txt", "ranchDoorKeys.txt", RANCH);
     Map castle("castle.txt", "castleKeysKeys.txt", "castleDoorKeys.txt", CASTLE);
@@ -88,13 +109,9 @@ void GamePlay::play() {
     maps.push_back(&ranch);
     maps.push_back(&castle);
 
-    // get the max width of the screen
-    for (unsigned int i = 0; i < maps.size(); ++i) {
-        if (maps.at(i)->getBoardSizeX() > width) {
-            this->width = maps.at(i)->getBoardSizeX() - 2;
-        }
-    }
-
+    // initialize variables
+    Map *map = &house;
+    MapState mapState = HOUSE;
 
     // initialize character starting position
     Space *playerSpace = house.getSpace(player.getXCoord(), player.getYCoord());
@@ -102,37 +119,26 @@ void GamePlay::play() {
     player.setYCoord(house.getPlayerStartingY());
     house.printMap(player.getXCoord(), player.getYCoord());
 
-    // initialize variables
-    Map *map = &house;
-
+    // begin printing
     printStartingDialogue(map, player);
-
     system("clear");
     house.printMap(player.getXCoord(), player.getYCoord());
 
-    MapState mapState = HOUSE;
-    char move = ' ', doorID = ' ';
-    bool passedThroughDoor = false;
-    bool couldMove = false;
-    KeySpace *keySpace;
-    DoorSpace *doorSpace;
-    string newKey;
 
-    // key input instructions
-    int size = 5;
-    char acceptable[size] = {'a', 's', 'd', 'w', 'e'};
-    string instructions = "a = left, s = down, d = right, w = up, e = exit";
 
-    //DEBUG - use as shortcuts
+//    //DEBUG - use as shortcuts
+//    player.pickUpKey("forestKey");
 //    player.pickUpKey("houseKey");
 //    player.pickUpKey("lakeKey");
 //    player.pickUpKey("ranchKey");
 //    player.pickUpKey("castleKey");
 
-    while (move != 'e' && mapState != END) {
+    this->width = map->getBoardSizeX() - 2;
+    while (move != 'e' && mapState != END && stepsLeft != 0) {
         // takes a,s,d,w,e
         printInstructions(instructions, map->getBoardSizeX());
         move = getCharacterNoReturn(acceptable, size);
+        stepsLeft--;
         couldMove = player.makeMove(move, playerSpace, width);
 
         system("clear");
@@ -141,7 +147,21 @@ void GamePlay::play() {
 
         // print space reaction
         if(!couldMove){
+            // print space reaction
             player.failedMoveReact(move, playerSpace, width);
+
+            // show keys
+            if(move == 'p'){
+                keysList = "You have the following keys: ";
+                player.getKeys();
+                if(player.getKeys().size() == 0){
+                    keysList += "you have no keys!";
+                }
+                for (const auto &key : player.getKeys()) {
+                    keysList += key + " ";
+                }
+                printMessage(keysList,width);
+            }
         }
 
 
@@ -167,6 +187,12 @@ void GamePlay::play() {
                     printMessage("You do not have the required key: "
                                  + doorSpace->getKey(), width);
                 }
+                break;
+            case EXIT:
+                playerSpace->react(width);
+                mapState = END;
+                wonGame = true;
+                break;
             default:
                 break;
         }
@@ -187,6 +213,16 @@ void GamePlay::play() {
             passedThroughDoor = false;
         }
     }
+    if(wonGame) {
+        printEndingDialogue(map, player);
+    }
+
+    // good bye screen
+    system("clear");
+    printBorder(width);
+    printLeftAligned("Thank you for playing my project, this was made for Oregon State's CS 162 intro to computer science II", width);
+    printLeftAligned("Credit: Patrick Rice", width);
+    printCenterTitle("Goodbye", width);
 }
 
 Map *GamePlay::getMap(vector<Map *> maps, MapState mapState) {
@@ -203,6 +239,7 @@ void GamePlay::printInstructions(string instructions, int width) {
     width = width - 2;
     printBorder(width);
     printLeftAligned(instructions, width);
+    printLeftAligned("Steps left: " + to_string(stepsLeft), width);
     printLeftAligned("Enter your move: ", width);
     printBorder(width);
 }
@@ -250,6 +287,45 @@ void GamePlay::printStartingDialogue(Map* map, Player player){
     system("clear");
     map->printMap(player.getXCoord(), player.getYCoord());
     dialogue = "Brother: Go now, find your way to the castle and save your self.";
+    printDialogue(dialogue, width);
+
+}
+
+/*********************************************************************
+ * Constructor
+ * @param width is the width of the console output
+*********************************************************************/
+void GamePlay::printEndingDialogue(Map* map, Player player){
+    int width = map->getBoardSizeX() - 2;
+    string dialogue;
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "You found the antidote!";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "With the little energy you have left, you open the bottle and drink until it's dry.";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "...";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "You can feel your energy coming back!";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Never again will you make the mistake between Queen Anne's Lace and poison hemlock!";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Remember, hemlock's stems are red with the blood of Socrates.";
     printDialogue(dialogue, width);
 
 }

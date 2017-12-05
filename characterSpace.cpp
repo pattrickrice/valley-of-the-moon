@@ -1,14 +1,14 @@
 /*********************************************************************
  * Author: Patrick Rice
  * Date: 12/5/2017
- * Description: Implementation file for the ExitSpace class
+ * Description: Implementation file for the characterSpace class
 *********************************************************************/
-#include "exitSpace.hpp"
+#include "characterSpace.hpp"
 #include "utilities.hpp"
 using std::string;
 using std::cin;
 
-ExitSpace::ExitSpace() = default;
+CharacterSpace::CharacterSpace() = default;
 
 /*********************************************************************
  * Constructor.
@@ -19,13 +19,13 @@ ExitSpace::ExitSpace() = default;
  * @param right is the right space pointer.
  * @param bottom is the bottom space pointer.
  ********************************************************************/
-ExitSpace::ExitSpace(char value,
+CharacterSpace::CharacterSpace(char value,
                      Space *top,
                      Space *left,
                      Space *right,
                      Space *bottom,
                      MapState mapState) : Space(EXIT,
-                                                true,
+                                                false,
                                                 value,
                                                 top,
                                                 left,
@@ -34,11 +34,10 @@ ExitSpace::ExitSpace(char value,
                                                 mapState) {
 }
 
-void ExitSpace::react(int width) {
+void CharacterSpace::react(int width) {
     string dialogue;
-    dialogue += "You've found the antidote! [Press enter to continue]";
+    dialogue += "Stop wasting time! Find the antidote!";
     printBorder(width);
     printLeftAligned(dialogue, width);
     printBorder(width);
-    cin.ignore();
 }

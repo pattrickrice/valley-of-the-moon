@@ -8,6 +8,8 @@
 #include "wallSpace.hpp"
 #include "keySpace.hpp"
 #include "doorSpace.hpp"
+#include "exitSpace.hpp"
+#include "characterSpace.hpp"
 #include <fstream>
 
 using std::fstream;
@@ -354,7 +356,6 @@ Space *Map::setSpace(char value,
         case '\\':
         case '+':
         case '_':
-        case 'N':
             newWall = new WallSpace(value,
                                     top,
                                     left,
@@ -394,7 +395,22 @@ Space *Map::setSpace(char value,
             doorCounter++;
             newTile = newDoor;
             break;
-
+        case 'N':
+            newTile = new CharacterSpace(value,
+                                    top,
+                                    left,
+                                    right,
+                                    bottom,
+                                    mapState);
+            break;
+        case 'A':
+            newTile = new ExitSpace(value,
+                                     top,
+                                     left,
+                                     right,
+                                     bottom,
+                                     mapState);
+            break;
         case 'S':
             playerStartingX = currentX;
             playerStartingY = currentY;
