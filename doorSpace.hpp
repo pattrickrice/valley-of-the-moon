@@ -17,6 +17,7 @@ class DoorSpace : public Space {
     char doorID;
     int XCoord;
     int YCoord;
+    int width;
 public:
     DoorSpace();
 
@@ -40,7 +41,7 @@ public:
 
     int getYCoord();
 
-    void printMessage() override;
+    void react(int width) override;
 
     ~DoorSpace() {
         // Do some important cleanup

@@ -31,6 +31,6 @@ EmptySpace::EmptySpace(char value,
                                                   mapState) {
 }
 
-void EmptySpace::printMessage() {}
+void EmptySpace::react(int width) {}
 
 

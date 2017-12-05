@@ -90,7 +90,7 @@ void GamePlay::play() {
     // get the max width of the screen
     for (unsigned int i = 0; i < maps.size(); ++i) {
         if (maps.at(i)->getBoardSizeX() > width) {
-            this->width = maps.at(i)->getBoardSizeX() -2;
+            this->width = maps.at(i)->getBoardSizeX() - 2;
         }
     }
 
@@ -106,6 +106,7 @@ void GamePlay::play() {
     MapState mapState = HOUSE;
     char move = ' ', doorID = ' ';
     bool passedThroughDoor = false;
+    bool couldMove = false;
     KeySpace *keySpace;
     DoorSpace *doorSpace;
     string newKey;
@@ -121,26 +122,30 @@ void GamePlay::play() {
 //    player.pickUpKey("ranchKey");
 //    player.pickUpKey("castleKey");
 
-    while (move != 'e' && mapState != EXIT) {
+    while (move != 'e' && mapState != END) {
         // takes a,s,d,w,e
         printInstructions(instructions, map->getBoardSizeX());
         move = getCharacterNoReturn(acceptable, size);
-        player.makeMove(move, playerSpace);
-        system("clear");
+        couldMove = player.makeMove(move, playerSpace, width);
 
+        system("clear");
         playerSpace = map->getSpace(player.getXCoord(), player.getYCoord());
         map->printMap(player.getXCoord(), player.getYCoord());
+
+        // print space reaction
+        if(!couldMove){
+            player.failedMoveReact(move, playerSpace, width);
+        }
+
 
         switch (playerSpace->getSpaceType()) {
             case KEY:
                 keySpace = dynamic_cast<KeySpace *>(playerSpace);
+                keySpace->react(width);
                 // if the player hasn't grabbed the key already
                 if (keySpace->isKeyPresent()) {
                     newKey = keySpace->takeKey();
                     player.pickUpKey(newKey);
-
-                    printMessage( "You picked up the key: "
-                                      + newKey + " !", width);
                 }
                 break;
             case DOOR:
@@ -153,7 +158,7 @@ void GamePlay::play() {
                     doorID = doorSpace->getDoorID();
                 } else {
                     printMessage("You do not have the required key: "
-                         + doorSpace->getKey(), width);
+                                 + doorSpace->getKey(), width);
                 }
             default:
                 break;
@@ -163,7 +168,7 @@ void GamePlay::play() {
         if (passedThroughDoor) {
             system("clear");
             map = getMap(maps, mapState);
-            this->width = map->getBoardSizeX() -2;
+            this->width = map->getBoardSizeX() - 2;
 
             // player just entered the map. Find their location
             player.setXCoord(map->getDoorXCoord(doorID));

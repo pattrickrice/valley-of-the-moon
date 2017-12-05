@@ -4,6 +4,7 @@
  * Description: Implementation file for the DoorSpace class
 *********************************************************************/
 #include "doorSpace.hpp"
+#include "utilities.hpp"
 
 DoorSpace::DoorSpace() = default;
 
@@ -39,7 +40,10 @@ DoorSpace::DoorSpace(char value,
     this->YCoord = YCoord;
 }
 
-void DoorSpace::printMessage() {}
+void DoorSpace::react(int width) {
+
+}
+
 
 
 /********************************************************************

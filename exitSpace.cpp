@@ -1,12 +1,11 @@
 /*********************************************************************
  * Author: Patrick Rice
- * Date: 11/26/2017
- * Description: Implementation file for the wallSpace class
+ * Date: 12/5/2017
+ * Description: Implementation file for the ExitSpace class
 *********************************************************************/
-#include "wallSpace.hpp"
-#include "utilities.hpp"
+#include "exitSpace.hpp"
 
-WallSpace::WallSpace() = default;
+ExitSpace::ExitSpace() = default;
 
 /*********************************************************************
  * Constructor.
@@ -17,12 +16,12 @@ WallSpace::WallSpace() = default;
  * @param right is the right space pointer.
  * @param bottom is the bottom space pointer.
  ********************************************************************/
-WallSpace::WallSpace(char value,
+ExitSpace::ExitSpace(char value,
                      Space *top,
                      Space *left,
                      Space *right,
                      Space *bottom,
-                     MapState mapState) : Space(WALL,
+                     MapState mapState) : Space(EXIT,
                                                 false,
                                                 value,
                                                 top,
@@ -32,6 +31,6 @@ WallSpace::WallSpace(char value,
                                                 mapState) {
 }
 
-void WallSpace::react(int width) {
-    printMessage("You have hit a wall!", width);
+void ExitSpace::react(int width) {
+
 }

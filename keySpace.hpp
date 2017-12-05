@@ -27,7 +27,7 @@ public:
              MapState mapState,
              string key);
 
-    void printMessage() override;
+    void react(int width) override;
 
     string getKey();
 

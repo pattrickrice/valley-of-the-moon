@@ -8,11 +8,11 @@
 #define SPACE_HPP
 
 enum SpaceType {
-    EMPTY, WALL, DOOR, KEY,
+    EMPTY, WALL, DOOR, KEY, EXIT
 };
 
 enum MapState {
-    HOUSE, VALLEY, FOREST, DEEPFOREST, LAKE, RANCH, CASTLE, EXIT
+    HOUSE, VALLEY, FOREST, DEEPFOREST, LAKE, RANCH, CASTLE, END
 };
 
 class Space {
@@ -66,7 +66,7 @@ public:
 
     bool isPermeable();
 
-    virtual void printMessage() = 0;
+    virtual void react(int) = 0;
 
     MapState getMapState();
 

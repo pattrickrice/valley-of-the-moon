@@ -57,46 +57,48 @@ bool Character::makeMove() {
 /*********************************************************************
  * Moves character left
  ********************************************************************/
-MapState Character::moveLeft(Space *characterSpace) {
+bool Character::moveLeft(Space *characterSpace, int width) {
     if (characterSpace->getLeft() != nullptr && characterSpace->getLeft()->isPermeable()) {
         XCoord--;
-        return characterSpace->getLeft()->getMapState();
+        return true;
     }
-    return characterSpace->getMapState();
+    return false;
 }
 
 /*********************************************************************
  * Moves character right
  ********************************************************************/
-MapState Character::moveRight(Space *characterSpace) {
+bool Character::moveRight(Space *characterSpace, int width) {
     if (characterSpace->getRight() != nullptr && characterSpace->getRight()->isPermeable()) {
         XCoord++;
-        return characterSpace->getRight()->getMapState();
+        return true;
     }
-    return characterSpace->getMapState();
+    return false;
 }
 
 /*********************************************************************
  * Moves character up
  ********************************************************************/
-MapState Character::moveUp(Space *characterSpace) {
+bool Character::moveUp(Space *characterSpace, int width) {
     if (characterSpace->getTop() != nullptr && characterSpace->getTop()->isPermeable()) {
         //inverted
         YCoord--;
-        return characterSpace->getTop()->getMapState();
+        return true;
     }
-    return characterSpace->getMapState();
+    return false;
 }
 
 /*********************************************************************
  * Moves character down
  ********************************************************************/
-MapState Character::moveDown(Space *characterSpace) {
+bool Character::moveDown(Space *characterSpace, int width) {
     if (characterSpace->getBottom() != nullptr && characterSpace->getBottom()->isPermeable()) {
         YCoord++;
-        return characterSpace->getBottom()->getMapState();
+        return true;
     }
-    return characterSpace->getMapState();
+    // notify player with message if failed
+    characterSpace->getBottom()->react(width);
+    return false;
 }
 
 /*********************************************************************

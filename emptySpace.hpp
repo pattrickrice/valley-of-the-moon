@@ -20,7 +20,7 @@ public:
                Space *bottom,
                MapState mapState);
 
-    void printMessage() override;
+    void react(int width) override;
 
     ~EmptySpace()
     {

@@ -1,19 +1,19 @@
 /*********************************************************************
  * Author: Patrick Rice
- * Date: 11/25/2017
- * Description: Header file for the space class
+ * Date: 12/5/2017
+ * Description: Header file for the ExitSpace class
 *********************************************************************/
 
-#ifndef WALLSPACE_HPP
-#define WALLSPACE_HPP
+#ifndef EXITSPACE_HPP
+#define EXITSPACE_HPP
 
 #include "space.hpp"
 
-class WallSpace : public Space {
+class ExitSpace : public Space {
 public:
-    WallSpace();
+    ExitSpace();
 
-    WallSpace(char value,
+    ExitSpace(char value,
               Space *top,
               Space *left,
               Space *right,
@@ -22,10 +22,7 @@ public:
 
     void react(int width) override ;
 
-    ~WallSpace()
-    {
-        // Do some important cleanup
-    }
+    ~ExitSpace() {}
 
 };
 

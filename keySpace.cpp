@@ -4,6 +4,7 @@
  * Description: Implementation file for the keySpace class
 *********************************************************************/
 #include "keySpace.hpp"
+#include "utilities.hpp"
 
 KeySpace::KeySpace() = default;
 
@@ -22,13 +23,13 @@ KeySpace::KeySpace(char value,
                    Space *right,
                    Space *bottom,
                    MapState mapState, string key) : Space(KEY,
-                                              true,
-                                              value,
-                                              top,
-                                              left,
-                                              right,
-                                              bottom,
-                                              mapState) {
+                                                          true,
+                                                          value,
+                                                          top,
+                                                          left,
+                                                          right,
+                                                          bottom,
+                                                          mapState) {
     this->key = key;
     this->keyPresent = true;
 }
@@ -36,14 +37,14 @@ KeySpace::KeySpace(char value,
 /*********************************************************************
  * Returns the value of the key
  ********************************************************************/
-string KeySpace::getKey(){
+string KeySpace::getKey() {
     return key;
 }
 
 /*********************************************************************
  * Returns if the user has taken the key.
  ********************************************************************/
-bool KeySpace::isKeyPresent(){
+bool KeySpace::isKeyPresent() {
     return this->keyPresent;
 }
 
@@ -57,6 +58,12 @@ string KeySpace::takeKey() {
     return key;
 }
 
-void KeySpace::printMessage() {
-
+void KeySpace::react(int width) {
+    if (isKeyPresent()) {
+        printMessage("You picked up the key: "
+                     + getKey() + " !", width);
+    } else{
+        printMessage("This is where I found that key... "
+                     + getKey(), width);
+    }
 }

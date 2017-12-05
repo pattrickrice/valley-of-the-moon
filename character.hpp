@@ -28,13 +28,13 @@ public:
 
     bool makeMove();
 
-    virtual MapState moveLeft(Space *);
+    virtual bool moveLeft(Space *, int);
 
-    virtual MapState moveRight(Space *);
+    virtual bool moveRight(Space *, int);
 
-    virtual MapState moveUp(Space *);
+    virtual bool moveUp(Space *, int);
 
-    virtual MapState moveDown(Space *);
+    virtual bool moveDown(Space *, int);
 
     int getXCoord();
     int getYCoord();

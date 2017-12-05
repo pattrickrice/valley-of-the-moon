@@ -10,6 +10,7 @@
 #include "character.hpp"
 #include "space.hpp"
 #include "map.hpp"
+
 using std::set;
 
 class Player : public Character {
@@ -20,15 +21,25 @@ public:
 
     Player(int XCoord, int YCoord);
 
-    MapState makeMove(char, Space *);
+    bool makeMove(char, Space *, int);
 
-    MapState moveUp(Space *) override;
+    void failedMoveReact(char move, Space *playerSpace, int width);
 
-    MapState moveRight(Space *) override;
+    bool moveUp(Space *, int) override;
 
-    MapState moveLeft(Space *) override;
+    bool moveRight(Space *, int) override;
 
-    MapState moveDown(Space *) override;
+    bool moveLeft(Space *, int) override;
+
+    bool moveDown(Space *, int) override;
+
+    void moveUpReaction(Space *, int);
+
+    void moveRightReaction(Space *, int);
+
+    void moveLeftReaction(Space *, int);
+
+    void moveDownReaction(Space *, int);
 
     void pickUpKey(string);
 

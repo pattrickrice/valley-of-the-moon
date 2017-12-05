@@ -24,59 +24,124 @@ Player::Player(int XCoord, int YCoord) : Character(XCoord, YCoord){}
  * Takes the input of the player and moves the player.
  * @param move is the move from the input
  * @param playerSpace is the space the player occupies
+ * @param width is the width of the map
 *********************************************************************/
-MapState Player::makeMove(char move, Space * playerSpace){
+bool Player::makeMove(char move, Space * playerSpace, int width){
 
     switch (move){
         //D-pad controller
         case 'a':
-            moveLeft(playerSpace);
-            break;
+            return moveLeft(playerSpace, width);
         case 's':
-            moveDown(playerSpace);
-            break;
+            return moveDown(playerSpace, width);
         case 'd':
-            moveRight(playerSpace);
-            break;
+            return moveRight(playerSpace, width);
         case 'w':
-            moveUp(playerSpace);
-            break;
+            return moveUp(playerSpace, width);
         default:
             //TODO
             //invalid input;
-            return HOUSE;
+            return false;
     }
-    return HOUSE;
+};
+
+
+/*********************************************************************
+ * Takes the input of the player and prints the message of not moving
+ * @param move is the move from the input
+ * @param playerSpace is the space the player occupies
+ * @param width is the width of the map
+*********************************************************************/
+void Player::failedMoveReact(char move, Space * playerSpace, int width){
+
+    switch (move){
+        //D-pad controller
+        case 'a':
+            moveLeftReaction(playerSpace, width);
+            break;
+        case 's':
+            moveDownReaction(playerSpace, width);
+            break;
+        case 'd':
+            moveRightReaction(playerSpace, width);
+            break;
+        case 'w':
+            moveUpReaction(playerSpace, width);
+            break;
+        case 'e':
+            printMessage("Exiting Game", width);
+            break;
+        default:
+            printMessage("Error", width);
+            //TODO
+            //invalid input;
+    }
 };
 
 /*********************************************************************
  * Moves character left
  ********************************************************************/
-MapState Player::moveLeft(Space *playerSpace) {
-    return Character::moveLeft(playerSpace);
+bool Player::moveLeft(Space *playerSpace, int width) {
+    return Character::moveLeft(playerSpace, width);
 }
 
 /*********************************************************************
  * Moves character right
  ********************************************************************/
-MapState Player::moveRight(Space *playerSpace) {
-    return Character::moveRight(playerSpace);
+bool Player::moveRight(Space *playerSpace, int width) {
+    return Character::moveRight(playerSpace, width);
 }
 
 /*********************************************************************
  * Moves character up
  ********************************************************************/
-MapState Player::moveUp(Space *playerSpace) {
+bool Player::moveUp(Space *playerSpace, int width) {
     // inverted
-    return Character::moveUp(playerSpace);
+    return Character::moveUp(playerSpace, width);
 }
 
 /*********************************************************************
  * Moves character down
  ********************************************************************/
-MapState Player::moveDown(Space *playerSpace) {
+bool Player::moveDown(Space *playerSpace, int width) {
     // inverted
-    return Character::moveDown(playerSpace);
+    return Character::moveDown(playerSpace, width);
+}
+
+/*********************************************************************
+ * shows the reactions of a failed move up
+ ********************************************************************/
+void Player::moveUpReaction(Space *playerSpace, int width){
+    if(playerSpace->getTop() != nullptr){
+        playerSpace->getTop()->react(width);
+    }
+}
+
+/*********************************************************************
+ * shows the reactions of a failed move right
+ ********************************************************************/
+void Player::moveRightReaction(Space *playerSpace, int width){
+    if(playerSpace->getRight() != nullptr){
+        playerSpace->getRight()->react(width);
+    }
+}
+
+/*********************************************************************
+ * shows the reactions of a failed move left
+ ********************************************************************/
+void Player::moveLeftReaction(Space *playerSpace, int width){
+    if(playerSpace->getLeft() != nullptr){
+        playerSpace->getLeft()->react(width);
+    }
+}
+
+/*********************************************************************
+ * shows the reactions of a failed move down
+ ********************************************************************/
+void Player::moveDownReaction(Space *playerSpace, int width){
+    if(playerSpace->getBottom() != nullptr){
+        playerSpace->getBottom()->react(width);
+    }
 }
 
 /*********************************************************************
