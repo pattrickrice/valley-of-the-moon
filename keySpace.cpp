@@ -58,11 +58,14 @@ string KeySpace::takeKey() {
     return key;
 }
 
+/*********************************************************************
+ * Alerts the character of its interaction with the key
+ ********************************************************************/
 void KeySpace::react(int width) {
     if (isKeyPresent()) {
         printMessage("You picked up the key: "
                      + getKey() + " !", width);
-    } else{
+    } else {
         printMessage("This is where I found that key... "
                      + getKey(), width);
     }

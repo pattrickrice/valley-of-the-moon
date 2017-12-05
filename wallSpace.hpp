@@ -20,13 +20,9 @@ public:
               Space *bottom,
               MapState mapState);
 
-    void react(int width) override ;
+    void react(int width) override;
 
-    ~WallSpace()
-    {
-        // Do some important cleanup
-    }
-
+    ~WallSpace() {}
 };
 
 

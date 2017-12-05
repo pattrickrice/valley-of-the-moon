@@ -20,7 +20,7 @@ public:
               Space *bottom,
               MapState mapState);
 
-    void react(int width) override ;
+    void react(int width) override;
 
     ~ExitSpace() {}
 

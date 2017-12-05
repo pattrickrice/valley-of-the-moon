@@ -34,6 +34,10 @@ CharacterSpace::CharacterSpace(char value,
                                                 mapState) {
 }
 
+/*********************************************************************
+ * prints the characters dialogue
+ * @param width is the width of the console
+ ********************************************************************/
 void CharacterSpace::react(int width) {
     string dialogue;
     dialogue += "Stop wasting time! Find the antidote!";

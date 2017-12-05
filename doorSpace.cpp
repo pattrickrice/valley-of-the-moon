@@ -40,11 +40,10 @@ DoorSpace::DoorSpace(char value,
     this->YCoord = YCoord;
 }
 
-void DoorSpace::react(int width) {
-
-}
-
-
+/*********************************************************************
+ * Does nothing
+ ********************************************************************/
+void DoorSpace::react(int width) {}
 
 /********************************************************************
 * Returns the door's required key

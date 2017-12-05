@@ -149,7 +149,7 @@ bool Space::isPermeable() {
     return permeable;
 }
 
-MapState Space::getMapState(){
+MapState Space::getMapState() {
     return mapState;
 }
 

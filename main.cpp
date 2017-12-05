@@ -1,8 +1,11 @@
 /*********************************************************************
  * Program Name: Valley of the Moon
  * Author: Patrick Rice
- * Date: 11/24/2017
- * Description:
+ * Date: 12/5/2017
+ * Description: A text based adventure game, that uses the keyboard
+ * to move around. The character must collect a set of keys in order
+ * to reach the end of the game. The number of steps the character
+ * has left, is the limit to the length of the game.
 *********************************************************************/
 
 #include "menu.hpp"
@@ -32,7 +35,6 @@ int main() {
     mainMeu.addOption("Play");
     mainMeu.addOption("Exit");
 
-
     do {
 
         mainMeu.printMenu();
@@ -45,7 +47,6 @@ int main() {
         }
 
     } while (mainMenuChoice != 2);
-
 
     return 0;
 }

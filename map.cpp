@@ -397,19 +397,19 @@ Space *Map::setSpace(char value,
             break;
         case 'N':
             newTile = new CharacterSpace(value,
+                                         top,
+                                         left,
+                                         right,
+                                         bottom,
+                                         mapState);
+            break;
+        case 'A':
+            newTile = new ExitSpace(value,
                                     top,
                                     left,
                                     right,
                                     bottom,
                                     mapState);
-            break;
-        case 'A':
-            newTile = new ExitSpace(value,
-                                     top,
-                                     left,
-                                     right,
-                                     bottom,
-                                     mapState);
             break;
         case 'S':
             playerStartingX = currentX;
@@ -507,9 +507,9 @@ int Map::getPlayerStartingY() {
  * Returns a doors X-coordinate
  * @param inputDoorID is the door we are looking for
 *********************************************************************/
-int Map::getDoorXCoord(char inputDoorID){
+int Map::getDoorXCoord(char inputDoorID) {
     for (unsigned int i = 0; i < doorLocator.size(); ++i) {
-        if(doorLocator.at(i).doorID == inputDoorID){
+        if (doorLocator.at(i).doorID == inputDoorID) {
             return doorLocator.at(i).XCoord;
         }
     }
@@ -520,9 +520,9 @@ int Map::getDoorXCoord(char inputDoorID){
  * Returns a doors Y-coordinate
  * @param inputDoorID is the door we are looking for
 *********************************************************************/
-int Map::getDoorYCoord(char inputDoorID){
+int Map::getDoorYCoord(char inputDoorID) {
     for (unsigned int i = 0; i < doorLocator.size(); ++i) {
-        if(doorLocator.at(i).doorID == inputDoorID){
+        if (doorLocator.at(i).doorID == inputDoorID) {
             return doorLocator.at(i).YCoord;
         }
     }
@@ -550,7 +550,7 @@ int Map::getBoardSizeY() {
     return boardSizeY;
 }
 
-MapState Map::getMapID(){
+MapState Map::getMapID() {
     return this->mapID;
 }
 

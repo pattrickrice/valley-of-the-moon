@@ -11,7 +11,6 @@
 
 using std::string;
 
-
 class DoorSpace : public Space {
     string key;
     char doorID;
@@ -43,9 +42,7 @@ public:
 
     void react(int width) override;
 
-    ~DoorSpace() {
-        // Do some important cleanup
-    }
+    ~DoorSpace() {}
 
 };
 

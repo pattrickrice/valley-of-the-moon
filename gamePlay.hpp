@@ -33,11 +33,11 @@ public:
 
     void printDialogue(string dialogue, int width);
 
-    void printStartingDialogue(Map*, Player player);
+    void printStartingDialogue(Map *, Player player);
 
-    void printEndingDialogue(Map* map, Player player);
+    void printEndingDialogue(Map *map, Player player);
 
 
-    };
+};
 
 #endif

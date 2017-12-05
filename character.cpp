@@ -96,8 +96,6 @@ bool Character::moveDown(Space *characterSpace, int width) {
         YCoord++;
         return true;
     }
-    // notify player with message if failed
-    characterSpace->getBottom()->react(width);
     return false;
 }
 

@@ -14,13 +14,13 @@ public:
     CharacterSpace();
 
     CharacterSpace(char value,
-              Space *top,
-              Space *left,
-              Space *right,
-              Space *bottom,
-              MapState mapState);
+                   Space *top,
+                   Space *left,
+                   Space *right,
+                   Space *bottom,
+                   MapState mapState);
 
-    void react(int width) override ;
+    void react(int width) override;
 
     ~CharacterSpace() {}
 

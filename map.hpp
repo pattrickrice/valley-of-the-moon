@@ -22,7 +22,7 @@ private:
         char doorID;
     };
 
-    struct DoorLocation{
+    struct DoorLocation {
         char doorID;
         int XCoord;
         int YCoord;
@@ -80,7 +80,6 @@ public:
     int getDoorYCoord(char inputDoorID);
 
     MapState getDoorMapState(char key);
-
 
     MapState getMapID();
 

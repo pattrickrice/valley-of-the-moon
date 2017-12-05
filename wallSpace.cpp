@@ -32,6 +32,9 @@ WallSpace::WallSpace(char value,
                                                 mapState) {
 }
 
+/*********************************************************************
+ * Alerts the user they cannot proceed
+ ********************************************************************/
 void WallSpace::react(int width) {
     printMessage("You have hit a wall!", width);
 }

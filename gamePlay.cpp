@@ -8,7 +8,6 @@
 #include "utilities.hpp"
 #include "keySpace.hpp"
 #include "doorSpace.hpp"
-#include <vector>
 
 using std::cout;
 using std::endl;
@@ -40,12 +39,14 @@ GamePlay::GamePlay(int width) {
     this->stepCounter = 0;
     this->stepsLeft = 1500;
     this->startingMap = "houseMap.txt";
+    this->mapState = HOUSE;
 }
 
 /*********************************************************************
  * Constructor for debugging specific maps
  * @param width is the width of the console output
  * @param fileName the of the map
+ * @param mapState is the starting map state
 *********************************************************************/
 GamePlay::GamePlay(int width, string fileName, MapState mapState) {
     Player player(0, 0);
@@ -63,6 +64,8 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState) {
  * @param fileName the of the map
  * @param player is the player object and can include starting
  * information such as its initial position.
+ * @param mapState is the starting map state
+ * @param player is the starting player
 *********************************************************************/
 GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player) {
     this->player = player;
@@ -78,6 +81,7 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player)
  * chooses to exit the game.
 *********************************************************************/
 void GamePlay::play() {
+    // declare variables
     char move = ' ', doorID = ' ';
     bool passedThroughDoor = false;
     bool couldMove = false, wonGame = false;
@@ -87,7 +91,7 @@ void GamePlay::play() {
 
     // key input instructions
     int size = 6;
-    char acceptable[size] = {'a', 's', 'd', 'w', 'e', 'p'};
+    char acceptable[6] = {'a', 's', 'd', 'w', 'e', 'p'};
     string instructions = "a = left, s = down, d = right, w = up, p = print keys, e = exit";
     string keysList = "You have the following keys: ";
 
@@ -124,8 +128,6 @@ void GamePlay::play() {
     system("clear");
     house.printMap(player.getXCoord(), player.getYCoord());
 
-
-
 //    //DEBUG - use as shortcuts
 //    player.pickUpKey("forestKey");
 //    player.pickUpKey("houseKey");
@@ -133,38 +135,40 @@ void GamePlay::play() {
 //    player.pickUpKey("ranchKey");
 //    player.pickUpKey("castleKey");
 
+    // width is the size of the board
     this->width = map->getBoardSizeX() - 2;
     while (move != 'e' && mapState != END && stepsLeft != 0) {
-        // takes a,s,d,w,e
+        // have the player make the move
         printInstructions(instructions, map->getBoardSizeX());
         move = getCharacterNoReturn(acceptable, size);
         stepsLeft--;
         couldMove = player.makeMove(move, playerSpace, width);
 
+        // display the result
         system("clear");
         playerSpace = map->getSpace(player.getXCoord(), player.getYCoord());
         map->printMap(player.getXCoord(), player.getYCoord());
 
-        // print space reaction
-        if(!couldMove){
+        // print space reaction if could not move
+        if (!couldMove) {
             // print space reaction
             player.failedMoveReact(move, playerSpace, width);
 
             // show keys
-            if(move == 'p'){
+            if (move == 'p') {
                 keysList = "You have the following keys: ";
                 player.getKeys();
-                if(player.getKeys().size() == 0){
+                if (player.getKeys().size() == 0) {
                     keysList += "you have no keys!";
                 }
                 for (const auto &key : player.getKeys()) {
                     keysList += key + " ";
                 }
-                printMessage(keysList,width);
+                printMessage(keysList, width);
             }
         }
 
-
+        // specific space functions
         switch (playerSpace->getSpaceType()) {
             case KEY:
                 keySpace = dynamic_cast<KeySpace *>(playerSpace);
@@ -213,18 +217,24 @@ void GamePlay::play() {
             passedThroughDoor = false;
         }
     }
-    if(wonGame) {
+    if (wonGame) {
         printEndingDialogue(map, player);
     }
 
-    // good bye screen
+    // ending screen
     system("clear");
     printBorder(width);
-    printLeftAligned("Thank you for playing my project, this was made for Oregon State's CS 162 intro to computer science II", width);
+    printLeftAligned("Thank you for playing my project, this was made for Oregon State's CS 162 intro to computer science II",
+            width);
     printLeftAligned("Credit: Patrick Rice", width);
     printCenterTitle("Goodbye", width);
 }
 
+/*********************************************************************
+ * Returns the new map
+ * @param maps is the list of the maps for the game
+ * @param mapState is the new mapstate the game is in
+ ********************************************************************/
 Map *GamePlay::getMap(vector<Map *> maps, MapState mapState) {
     for (unsigned int i = 0; i < maps.size(); ++i) {
         if (maps.at(i)->getMapID() == mapState) {
@@ -235,6 +245,11 @@ Map *GamePlay::getMap(vector<Map *> maps, MapState mapState) {
     return maps.at(0);
 }
 
+/*********************************************************************
+ * prints the instructions on how to move the character
+ * @param instructions is a built string with some instructions in it
+ * @param width is the size of the console
+ ********************************************************************/
 void GamePlay::printInstructions(string instructions, int width) {
     width = width - 2;
     printBorder(width);
@@ -244,7 +259,12 @@ void GamePlay::printInstructions(string instructions, int width) {
     printBorder(width);
 }
 
-void GamePlay::printDialogue(string dialogue, int width){
+/*********************************************************************
+ * prints the dialogue on the screen
+ * @param dialogue is the dialogue to be printed
+ * @param width is the size of the console
+ ********************************************************************/
+void GamePlay::printDialogue(string dialogue, int width) {
     dialogue += "\n [Press enter to continue]";
     printBorder(width);
     printLeftAligned(dialogue, width);
@@ -253,10 +273,11 @@ void GamePlay::printDialogue(string dialogue, int width){
 }
 
 /*********************************************************************
- * Constructor
- * @param width is the width of the console output
+ * Prints the starting dialogue
+ * @param map is the map that is displayed with the dialogue
+ * @param player is the player
 *********************************************************************/
-void GamePlay::printStartingDialogue(Map* map, Player player){
+void GamePlay::printStartingDialogue(Map *map, Player player) {
     int width = map->getBoardSizeX() - 2;
     string dialogue;
     system("clear");
@@ -292,10 +313,11 @@ void GamePlay::printStartingDialogue(Map* map, Player player){
 }
 
 /*********************************************************************
- * Constructor
- * @param width is the width of the console output
+ * prints the ending dialogue of the game
+ * @param map is the map that is displayed with the dialogue
+ * @param player is the player
 *********************************************************************/
-void GamePlay::printEndingDialogue(Map* map, Player player){
+void GamePlay::printEndingDialogue(Map *map, Player player) {
     int width = map->getBoardSizeX() - 2;
     string dialogue;
     system("clear");

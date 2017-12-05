@@ -5,6 +5,7 @@
 *********************************************************************/
 #include "exitSpace.hpp"
 #include "utilities.hpp"
+
 using std::string;
 using std::cin;
 
@@ -34,6 +35,9 @@ ExitSpace::ExitSpace(char value,
                                                 mapState) {
 }
 
+/*********************************************************************
+ * Tells the character they found the end of the game
+ ********************************************************************/
 void ExitSpace::react(int width) {
     string dialogue;
     dialogue += "You've found the antidote! [Press enter to continue]";

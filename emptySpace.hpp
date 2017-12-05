@@ -9,7 +9,6 @@
 #include "space.hpp"
 
 class EmptySpace : public Space {
-private:
 public:
     EmptySpace();
 
@@ -22,10 +21,7 @@ public:
 
     void react(int width) override;
 
-    ~EmptySpace()
-    {
-        // Do some important cleanup
-    }
+    ~EmptySpace() {}
 };
 
 

@@ -31,6 +31,9 @@ EmptySpace::EmptySpace(char value,
                                                   mapState) {
 }
 
+/*********************************************************************
+ * Does nothing
+ ********************************************************************/
 void EmptySpace::react(int width) {}
 
 

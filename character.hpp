@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include "space.hpp"
+
 using std::vector;
 using std::string;
 
@@ -37,8 +38,11 @@ public:
     virtual bool moveDown(Space *, int);
 
     int getXCoord();
+
     int getYCoord();
+
     void setXCoord(int);
+
     void setYCoord(int);
 };
 
