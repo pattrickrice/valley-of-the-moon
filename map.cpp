@@ -22,6 +22,7 @@ Map::Map() {
     this->boardHead = nullptr;
     this->keyCounter = 0;
     this->doorCounter = 0;
+    this->mapID = HOUSE;
 }
 
 /*********************************************************************
@@ -33,7 +34,7 @@ Map::Map() {
 *********************************************************************/
 Map::Map(string mapFileName, string keyFileName, string doorFileName, MapState mapState) {
     this->keyCounter = this->doorCounter = 0;
-
+    this->mapID = mapState;
     this->boardHead = nullptr;
     keys = importKeys(keyFileName);
     doors = importDoors(doorFileName);
@@ -531,6 +532,10 @@ int Map::getBoardSizeX() {
 *********************************************************************/
 int Map::getBoardSizeY() {
     return boardSizeY;
+}
+
+MapState Map::getMapID(){
+    return this->mapID;
 }
 
 /*********************************************************************

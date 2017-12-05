@@ -46,4 +46,6 @@ string getAddress();
 
 void printCenteredBox(string input, int width, char filler);
 
+void printMessage(string input, int width);
+
 #endif

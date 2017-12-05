@@ -25,8 +25,11 @@ public:
 
     GamePlay(int, string, MapState, Player);
 
+    Map* getMap(vector<Map*>, MapState);
 
     void play();
+
+    void printInstructions(string, int width);
 
 };
 

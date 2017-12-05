@@ -38,6 +38,7 @@ private:
     vector<DoorLocation> doorLocator;
     unsigned long keyCounter;
     unsigned long doorCounter;
+    MapState mapID;
 
     bool importBoard(string filename, MapState mapState);
 
@@ -78,8 +79,10 @@ public:
 
     int getDoorYCoord(char inputDoorID);
 
-
     MapState getDoorMapState(char key);
+
+
+    MapState getMapID();
 
     ~Map();
 };

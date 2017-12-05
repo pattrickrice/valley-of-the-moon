@@ -7,6 +7,8 @@
 #include "utilities.hpp"
 #include <sstream>
 #include <iomanip>
+#include <vector>
+
 using std::stringstream;
 using std::cout;
 using std::cin;
@@ -14,6 +16,7 @@ using std::endl;
 using std::stoi;
 using std::string;
 using std::fstream;
+using std::vector;
 
 /*********************************************************************
  * Integer validation. Takes the entire line as a string,
@@ -160,7 +163,7 @@ char getCharacterWithReturn(char acceptable[], int size) {
     bool valid = false;
 
     // loop if not valid character
-    while(!valid) {
+    while (!valid) {
         // get input
         getline(cin, inputString);
         stringstream ss(inputString);
@@ -171,17 +174,17 @@ char getCharacterWithReturn(char acceptable[], int size) {
 
         // check that it is acceptable.
         for (int i = 0; i < size; ++i) {
-            if(inputChar == acceptable[i]){
+            if (inputChar == acceptable[i]) {
                 valid = true;
             }
         }
-        if(!valid){
+        if (!valid) {
             cout << "Please choose from: ";
 
-            for (int i = 0; i < size -1; ++i) {
+            for (int i = 0; i < size - 1; ++i) {
                 cout << acceptable[i] + ", ";
             }
-            cout << acceptable[size-1] + ' ';
+            cout << acceptable[size - 1] + ' ';
         }
     }
 
@@ -202,16 +205,16 @@ char getCharacterNoReturn(char acceptable[], int size) {
     char pushing;
 
     // acceptable characters
-    for (int i = 0; i < size -1; ++i) {
+    for (int i = 0; i < size - 1; ++i) {
         pushing = acceptable[i];
         output.push_back(pushing);
-        output+= ", ";
+        output += ", ";
     }
-    output.push_back(acceptable[size-1]);
+    output.push_back(acceptable[size - 1]);
 
 
     // loop if not valid character
-    while(!valid) {
+    while (!valid) {
         // get input
         system("stty raw");
         cin.get(inputChar);
@@ -220,11 +223,11 @@ char getCharacterNoReturn(char acceptable[], int size) {
 
         // check that it is acceptable.
         for (int i = 0; i < size; ++i) {
-            if(inputChar == acceptable[i]){
+            if (inputChar == acceptable[i]) {
                 valid = true;
             }
         }
-        if(!valid){
+        if (!valid) {
             cout << "Please choose from: " + output << endl;
         }
     }
@@ -240,21 +243,43 @@ char getCharacterNoReturn(char acceptable[], int size) {
  ********************************************************************/
 void printLeftAligned(string input, int width) {
 
-    //get string length
-    int stringLength = static_cast<int>(input.length());
+    string buffer;
+    stringstream ss(input);
+    string build;
+    vector<string> brokenStrings;
 
-    //left border
-    string output = "| ";
-    output += input;
-
-    //fill empty space of the box
-    for (int i = 0; i < width - 2 - stringLength; ++i) {
-        output += " ";
+    // split by white space
+    // break string up if it is too long.
+    while (ss >> buffer) {
+        build += buffer + " ";
+        if (build.size() == static_cast<unsigned int>(width) - 4) {
+            brokenStrings.push_back(build);
+            build.clear();
+        }
     }
+    brokenStrings.push_back(build);
 
-    //right border
-    output += "|\n";
-    cout << output;
+    //get string length
+    int stringLength;
+    //left border
+    string output;
+
+    for (unsigned int j = 0; j < brokenStrings.size(); ++j) {
+        stringLength = static_cast<int>(brokenStrings.at(j).length());
+
+        //left border
+        output = "| ";
+        output += brokenStrings.at(j);
+
+        //fill empty space of the box
+        for (int i = 0; i < width - 2 - stringLength; ++i) {
+            output += " ";
+        }
+
+        //right border
+        output += "|\n";
+        cout << output;
+    }
 }
 
 /*********************************************************************
@@ -288,6 +313,19 @@ void printBoldCenterTitle(string input, int width) {
  ********************************************************************/
 void printCenteredString(string input, int width) {
     printCenteredBox(input, width, ' ');
+}
+
+/*********************************************************************
+ * Takes a string and formats the output to be a box with a centered
+ * message
+ *
+ * @input is the string to be formatted
+ * @width is the width of the box the string will be inside
+ ********************************************************************/
+void printMessage(string input, int width) {
+    printBorder(width);
+    printCenteredString(input, width);
+    printBorder(width);
 }
 
 /*********************************************************************
