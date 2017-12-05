@@ -245,17 +245,20 @@ void printLeftAligned(string input, int width) {
 
     string buffer;
     stringstream ss(input);
-    string build;
+    string build, buildCheck;
     vector<string> brokenStrings;
 
     // split by white space
     // break string up if it is too long.
     while (ss >> buffer) {
-        build += buffer + " ";
-        if (build.size() == static_cast<unsigned int>(width) - 4) {
+        buildCheck += buffer + " ";
+        if (buildCheck.size() > static_cast<unsigned int>(width) - 4) {
             brokenStrings.push_back(build);
             build.clear();
+            buildCheck.clear();
+            buildCheck += buffer + " ";
         }
+        build += buffer + " ";
     }
     brokenStrings.push_back(build);
 

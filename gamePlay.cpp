@@ -13,6 +13,7 @@
 using std::cout;
 using std::endl;
 using std::vector;
+using std::cin;
 
 /*********************************************************************
  * Default constructor
@@ -103,6 +104,12 @@ void GamePlay::play() {
 
     // initialize variables
     Map *map = &house;
+
+    printStartingDialogue(map, player);
+
+    system("clear");
+    house.printMap(player.getXCoord(), player.getYCoord());
+
     MapState mapState = HOUSE;
     char move = ' ', doorID = ' ';
     bool passedThroughDoor = false;
@@ -200,6 +207,52 @@ void GamePlay::printInstructions(string instructions, int width) {
     printBorder(width);
 }
 
+void GamePlay::printDialogue(string dialogue, int width){
+    dialogue += "\n [Press enter to continue]";
+    printBorder(width);
+    printLeftAligned(dialogue, width);
+    printBorder(width);
+    cin.ignore();
+}
+
+/*********************************************************************
+ * Constructor
+ * @param width is the width of the console output
+*********************************************************************/
+void GamePlay::printStartingDialogue(Map* map, Player player){
+    int width = map->getBoardSizeX() - 2;
+    string dialogue;
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Brother: I can't believe this is happening!";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Brother: Of all the thoughtless things you could have done...";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Brother: I told you to grab Queen Anne's Lace for some carrot tea, and you grabbed poison hemlock! It's just a matter of time before the poison's effects take hold on you...";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Brother: There's only one place you can get an antidote, the castle at the southern end of the Valley of the Moon.";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Brother: You're going to have find a key to get you access to it, and beware, every step you take is one step towards that poison taking your life";
+    printDialogue(dialogue, width);
+
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    dialogue = "Brother: Go now, find your way to the castle and save your self.";
+    printDialogue(dialogue, width);
+
+}
 
 
 
