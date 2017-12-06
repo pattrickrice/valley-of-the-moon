@@ -24,11 +24,11 @@ Smash that makefile and start the game
 ```
 
 ##screenshots
+<a href="https://www.youtube.com/watch?time_continue=129&v=0XQPWDwvvvU"><img
+src="screenshots/youtube.png" width="400" /></a> 
 
-[![Youtube](/screenshots/youtube.png)](https://www.youtube.com/watch?time_continue=129&v=0XQPWDwvvvU)
-
-<img src="screenshots/1.png" width="350" />
-<img src="screenshots/2.png" width="350" />
-<img src="screenshots/3.png" width="350" />
+<img src="screenshots/1.png" width="400" />
+<img src="screenshots/2.png" width="400" />
+<img src="screenshots/3.png" width="400" />
 
 Thanks for viewing
