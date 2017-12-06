@@ -25,10 +25,10 @@ Smash that makefile and start the game
 
 ##screenshots
 
-![Youtube](/screenshots/youtube.png)
+[![Youtube](/screenshots/youtube.png)](https://www.youtube.com/watch?time_continue=129&v=0XQPWDwvvvU)
 
-![1](screenshots/1.png)
-![2](screenshots/2.png)
-![3](screenshots/3.png)
+<img src="screenshots/1.png" width="350" />
+<img src="screenshots/2.png" width="350" />
+<img src="screenshots/3.png" width="350" />
 
 Thanks for viewing
