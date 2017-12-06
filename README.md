@@ -27,8 +27,8 @@ Smash that makefile and start the game
 
 ![Youtube](/screenshots/youtube.png)
 
-![1](1.png)
-![2](2.png)
-![3](3.png)
+![1](screenshots/1.png)
+![2](screenshots/2.png)
+![3](screenshots/3.png)
 
 Thanks for viewing
