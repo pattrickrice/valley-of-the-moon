@@ -23,7 +23,7 @@ GamePlay::GamePlay() {
     this->player = player;
     this->width = 90;
     this->stepCounter = 0;
-    this->stepsLeft = 1500;
+    this->stepsLeft = 1600;
     this->startingMap = "houseMap.txt";
     this->mapState = HOUSE;
 }
@@ -37,7 +37,7 @@ GamePlay::GamePlay(int width) {
     this->player = player;
     this->width = width;
     this->stepCounter = 0;
-    this->stepsLeft = 1500;
+    this->stepsLeft = 1600;
     this->startingMap = "houseMap.txt";
     this->mapState = HOUSE;
 }
@@ -53,7 +53,7 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState) {
     this->player = player;
     this->width = width;
     this->stepCounter = 0;
-    this->stepsLeft = 1500;
+    this->stepsLeft = 1600;
     this->startingMap = fileName;
     this->mapState = mapState;
 }
@@ -73,7 +73,7 @@ GamePlay::GamePlay(int width, string fileName, MapState mapState, Player player)
     this->startingMap = fileName;
     this->mapState = mapState;
     this->stepCounter = 0;
-    this->stepsLeft = 1500;
+    this->stepsLeft = 1600;
 }
 
 /*********************************************************************
@@ -219,12 +219,18 @@ void GamePlay::play() {
     }
     if (wonGame) {
         printEndingDialogue(map, player);
+    } else if (move == 'e') {
+        printDialogue("Quiting game", width);
+    } else {
+        {}
+        printDialogue("You have died from poisoning", width);
     }
 
     // ending screen
     system("clear");
     printBorder(width);
-    printLeftAligned("Thank you for playing my project, this was made for Oregon State's CS 162 intro to computer science II",
+    printLeftAligned(
+            "Thank you for playing my project, this was made for Oregon State's CS 162 intro to computer science II",
             width);
     printLeftAligned("Credit: Patrick Rice", width);
     printCenterTitle("Goodbye", width);

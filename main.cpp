@@ -35,18 +35,28 @@ int main() {
     mainMeu.addOption("Play");
     mainMeu.addOption("Exit");
 
-    do {
+    Menu playAgain("Would you like to play again?");
+    playAgain.addOption("Yes");
+    playAgain.addOption("No");
 
-        mainMeu.printMenu();
-        mainMenuChoice = mainMeu.getChoice();
 
-        if (mainMenuChoice == 1) {
-            // play the game
-            GamePlay gameState;
-            gameState.play();
-        }
+    mainMeu.printMenu();
+    mainMenuChoice = mainMeu.getChoice();
+    if (mainMenuChoice != 2) {
+        do {
+            if (mainMenuChoice == 1) {
+                // play the game
+                GamePlay gameState;
+                gameState.play();
 
-    } while (mainMenuChoice != 2);
+                playAgain.printMenu();
+                mainMenuChoice = playAgain.getChoice();
+            }
+
+        } while (mainMenuChoice != 2);
+    }
+
+    printMessage("Goodbye",width);
 
     return 0;
 }
