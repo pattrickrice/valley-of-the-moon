@@ -14,12 +14,14 @@ reccomended that you [install Bash Ubuntu on
 Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install-win10)
 
 Clone the directory:
-```git clone https://github.com/pattrickrice/valley-of-the-moon.git
+```
+git clone https://github.com/pattrickrice/valley-of-the-moon.git
 cd valley-of-the-moon
 ```
 
 Smash that makefile and start the game
-```make
+```
+make
 ./game
 ```
 
