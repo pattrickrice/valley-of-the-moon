@@ -444,7 +444,6 @@ Space *Map::getSpace(int XCoord, int YCoord) {
             while (current != nullptr) {
                 // players position
                 if (x == XCoord && y == YCoord) {
-                    cout << "Player is at X: " << x << " Y: " << y << endl;
                     return current;
                 }
                 // x-axis
