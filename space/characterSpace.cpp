@@ -4,7 +4,7 @@
  * Description: Implementation file for the characterSpace class
 *********************************************************************/
 #include "characterSpace.hpp"
-#include "utilities.hpp"
+#include "../utils/utilities.hpp"
 using std::string;
 using std::cin;
 

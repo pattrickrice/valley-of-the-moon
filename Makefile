@@ -15,53 +15,53 @@ main.o: main.cpp
 	@echo '[BUILDING] ... main'
 	@$(CC) $(CFLAGS) main.cpp
 
-menu.o: menu.cpp
+menu.o: utils/menu.cpp
 	@echo '[BUILDING] ... menu'
-	@$(CC) $(CFLAGS) menu.cpp
+	@$(CC) $(CFLAGS) utils/menu.cpp
 
-utilities.o: utilities.cpp
+utilities.o: utils/utilities.cpp
 	@echo '[BUILDING] ... utilities'
-	@$(CC) $(CFLAGS) utilities.cpp
+	@$(CC) $(CFLAGS) utils/utilities.cpp
 
-map.o: map.cpp
+map.o: maps/map.cpp
 	@echo '[BUILDING] ... map'
-	@$(CC) $(CFLAGS) map.cpp
+	@$(CC) $(CFLAGS) maps/map.cpp
 
-character.o: character.cpp
+character.o: character/character.cpp
 	@echo '[BUILDING] ... character'
-	@$(CC) $(CFLAGS) character.cpp
+	@$(CC) $(CFLAGS) character/character.cpp
 
-space.o: space.cpp
+space.o: space/space.cpp
 	@echo '[BUILDING] ... space'
-	@$(CC) $(CFLAGS) space.cpp
+	@$(CC) $(CFLAGS) space/space.cpp
 
-emptySpace.o: emptySpace.cpp
+emptySpace.o: space/emptySpace.cpp
 	@echo '[BUILDING] ... emptySpace'
-	@$(CC) $(CFLAGS) emptySpace.cpp
+	@$(CC) $(CFLAGS) space/emptySpace.cpp
 
-wallSpace.o: wallSpace.cpp
+wallSpace.o: space/wallSpace.cpp
 	@echo '[BUILDING] ... wallSpace'
-	@$(CC) $(CFLAGS) wallSpace.cpp
+	@$(CC) $(CFLAGS) space/wallSpace.cpp
 
-keySpace.o: keySpace.cpp
+keySpace.o: space/keySpace.cpp
 	@echo '[BUILDING] ... keySpace'
-	@$(CC) $(CFLAGS) keySpace.cpp
+	@$(CC) $(CFLAGS) space/keySpace.cpp
 
-doorSpace.o: doorSpace.cpp
+doorSpace.o: space/doorSpace.cpp
 	@echo '[BUILDING] ... doorSpace'
-	@$(CC) $(CFLAGS) doorSpace.cpp
+	@$(CC) $(CFLAGS) space/doorSpace.cpp
 
-characterSpace.o: characterSpace.cpp
+characterSpace.o: space/characterSpace.cpp
 	@echo '[BUILDING] ... characterSpace'
-	@$(CC) $(CFLAGS) characterSpace.cpp
+	@$(CC) $(CFLAGS) space/characterSpace.cpp
 
-exitSpace.o: exitSpace.cpp
+exitSpace.o: space/exitSpace.cpp
 	@echo '[BUILDING] ... exitSpace'
-	@$(CC) $(CFLAGS) exitSpace.cpp 
+	@$(CC) $(CFLAGS) space/exitSpace.cpp
 
-player.o: player.cpp
+player.o: character/player.cpp
 	@echo '[BUILDING] ... player'
-	@$(CC) $(CFLAGS) player.cpp
+	@$(CC) $(CFLAGS) character/player.cpp
 
 gamePlay.o: gamePlay.cpp
 	@echo '[BUILDING] ... gamePlay'
@@ -74,5 +74,4 @@ clean:
 .PHONY: valgrind
 
 valgrind:
-	valgrind --tool=memcheck ant
-
+	valgrind --tool=memcheck game

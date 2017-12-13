@@ -4,7 +4,7 @@
  * Description: Implementation file for the DoorSpace class
 *********************************************************************/
 #include "doorSpace.hpp"
-#include "utilities.hpp"
+#include "../utils/utilities.hpp"
 
 DoorSpace::DoorSpace() = default;
 

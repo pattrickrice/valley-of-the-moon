@@ -5,9 +5,9 @@
 *********************************************************************/
 #include <cstdlib>
 #include "gamePlay.hpp"
-#include "utilities.hpp"
-#include "keySpace.hpp"
-#include "doorSpace.hpp"
+#include "utils/utilities.hpp"
+#include "space/keySpace.hpp"
+#include "space/doorSpace.hpp"
 
 using std::cout;
 using std::endl;
@@ -96,13 +96,13 @@ void GamePlay::play() {
     string keysList = "You have the following keys: ";
 
     // create all of the maps
-    Map house("houseMap.txt", "houseKeys.txt", "houseDoorKeys.txt", HOUSE);
-    Map valley("valley.txt", "valleyKeys.txt", "valleyDoorKeys.txt", VALLEY);
-    Map forest("forest.txt", "forestKeys.txt", "forestDoorKeys.txt", FOREST);
-    Map deepForrest("deepForest.txt", "deepForestKeys.txt", "deepForestDoorKeys.txt", DEEPFOREST);
-    Map lake("lake.txt", "lakeKeys.txt", "lakeDoorKeys.txt", LAKE);
-    Map ranch("ranch.txt", "ranchKeys.txt", "ranchDoorKeys.txt", RANCH);
-    Map castle("castle.txt", "castleKeysKeys.txt", "castleDoorKeys.txt", CASTLE);
+    Map house("maps/houseMap.txt", "keys/houseKeys.txt", "doors/houseDoorKeys.txt", HOUSE);
+    Map valley("maps/valley.txt", "keys/valleyKeys.txt", "doors/valleyDoorKeys.txt", VALLEY);
+    Map forest("maps/forest.txt", "keys/forestKeys.txt", "doors/forestDoorKeys.txt", FOREST);
+    Map deepForrest("maps/deepForest.txt", "keys/deepForestKeys.txt", "doors/deepForestDoorKeys.txt", DEEPFOREST);
+    Map lake("maps/lake.txt", "keys/lakeKeys.txt", "doors/lakeDoorKeys.txt", LAKE);
+    Map ranch("maps/ranch.txt", "keys/ranchKeys.txt", "doors/ranchDoorKeys.txt", RANCH);
+    Map castle("maps/castle.txt", "keys/castleKeysKeys.txt", "doors/castleDoorKeys.txt", CASTLE);
 
     vector<Map *> maps;
     maps.push_back(&house);

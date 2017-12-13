@@ -4,7 +4,7 @@
  * Description: Implementation file for the wallSpace class
 *********************************************************************/
 #include "wallSpace.hpp"
-#include "utilities.hpp"
+#include "../utils/utilities.hpp"
 
 WallSpace::WallSpace() = default;
 

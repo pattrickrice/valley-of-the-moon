@@ -6,8 +6,8 @@
 #ifndef GAMESTATE_HPP
 #define GAMESTATE_HPP
 
-#include "player.hpp"
-#include "map.hpp"
+#include "character/player.hpp"
+#include "maps/map.hpp"
 
 class GamePlay {
 private:

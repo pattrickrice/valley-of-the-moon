@@ -4,7 +4,7 @@
  * Description: Implementation file for the keySpace class
 *********************************************************************/
 #include "keySpace.hpp"
-#include "utilities.hpp"
+#include "../utils/utilities.hpp"
 
 KeySpace::KeySpace() = default;
 

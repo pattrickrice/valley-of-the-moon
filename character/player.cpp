@@ -6,7 +6,7 @@
 
 #include "player.hpp"
 #include <iostream>
-#include "utilities.hpp"
+#include "../utils/utilities.hpp"
 using std::cout;
 using std::endl;
 using std::cin;

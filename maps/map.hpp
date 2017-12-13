@@ -6,7 +6,7 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
-#include "space.hpp"
+#include "../space/space.hpp"
 #include <iostream>
 #include <vector>
 

@@ -8,7 +8,7 @@
 
 #include <string>
 #include <vector>
-#include "space.hpp"
+#include "../space/space.hpp"
 
 using std::vector;
 using std::string;

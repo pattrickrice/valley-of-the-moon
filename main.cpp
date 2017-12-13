@@ -8,9 +8,9 @@
  * has left, is the limit to the length of the game.
 *********************************************************************/
 
-#include "menu.hpp"
-#include "map.hpp"
-#include "utilities.hpp"
+#include "utils/menu.hpp"
+#include "maps/map.hpp"
+#include "utils/utilities.hpp"
 #include "gamePlay.hpp"
 
 using std::cout;

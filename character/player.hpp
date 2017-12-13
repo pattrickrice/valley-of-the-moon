@@ -8,8 +8,8 @@
 
 #include <set>
 #include "character.hpp"
-#include "space.hpp"
-#include "map.hpp"
+#include "../space/space.hpp"
+#include "../maps/map.hpp"
 
 using std::set;
 

@@ -4,12 +4,12 @@
  * Description: Implementation of the map class
 *********************************************************************/
 #include "map.hpp"
-#include "emptySpace.hpp"
-#include "wallSpace.hpp"
-#include "keySpace.hpp"
-#include "doorSpace.hpp"
-#include "exitSpace.hpp"
-#include "characterSpace.hpp"
+#include "../space/emptySpace.hpp"
+#include "../space/wallSpace.hpp"
+#include "../space/keySpace.hpp"
+#include "../space/doorSpace.hpp"
+#include "../space/exitSpace.hpp"
+#include "../space/characterSpace.hpp"
 #include <fstream>
 
 using std::fstream;
