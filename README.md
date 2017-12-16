@@ -8,7 +8,10 @@ for the map system, and base/child classes for each space.
 The goal of the game is for the player to collect all of the keys and make it to the castle before
 they run out of steps.
 
-## install
+> Literally an insane amount of effort put into this project. One of the best that I have ever seen,
+> 10 points extra credit! - TA
+
+## Install
 The game requires Linux/Unix console for refreshing the screen. If you are on Windows it is
 reccomended that you [install Bash Ubuntu on
 Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install-win10)
