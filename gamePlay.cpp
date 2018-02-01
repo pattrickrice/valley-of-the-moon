@@ -284,38 +284,16 @@ void GamePlay::printDialogue(string dialogue, int width) {
  * @param player is the player
 *********************************************************************/
 void GamePlay::printStartingDialogue(Map *map, Player player) {
-    int width = map->getBoardSizeX() - 2;
-    string dialogue;
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Brother: I can't believe this is happening!";
-    printDialogue(dialogue, width);
+    string speech[6] = {"Brother: I can't believe this is happening!",
+                        "Brother: Of all the thoughtless things you could have done...",
+                        "Brother: I told you to grab Queen Anne's Lace for some carrot tea, and you grabbed poison hemlock! It's just a matter of time before the poison's effects take hold on you...",
+                        "Brother: There's only one place you can get an antidote, the castle at the southern end of the Valley of the Moon.",
+                        "Brother: You're going to have find a key to get you access to it, and beware, every step you take is one step towards that poison taking your life",
+                        "Brother: Go now, find your way to the castle and save your self."};
 
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Brother: Of all the thoughtless things you could have done...";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Brother: I told you to grab Queen Anne's Lace for some carrot tea, and you grabbed poison hemlock! It's just a matter of time before the poison's effects take hold on you...";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Brother: There's only one place you can get an antidote, the castle at the southern end of the Valley of the Moon.";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Brother: You're going to have find a key to get you access to it, and beware, every step you take is one step towards that poison taking your life";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Brother: Go now, find your way to the castle and save your self.";
-    printDialogue(dialogue, width);
-
+    for (int i = 0; i < 6; ++i) {
+        advanceDialouge(speech[i], map, player);
+    }
 }
 
 /*********************************************************************
@@ -324,41 +302,27 @@ void GamePlay::printStartingDialogue(Map *map, Player player) {
  * @param player is the player
 *********************************************************************/
 void GamePlay::printEndingDialogue(Map *map, Player player) {
-    int width = map->getBoardSizeX() - 2;
-    string dialogue;
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "You found the antidote!";
-    printDialogue(dialogue, width);
+    string speech[6] = {"You found the antidote!",
+                        "With the little energy you have left, you open the bottle and drink until it's dry.",
+                        "...",
+                        "You can feel your energy coming back!",
+                        "Never again will you make the mistake between Queen Anne's Lace and poison hemlock!",
+                        "Remember, hemlock's stems are red with the blood of Socrates."};
 
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "With the little energy you have left, you open the bottle and drink until it's dry.";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "...";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "You can feel your energy coming back!";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Never again will you make the mistake between Queen Anne's Lace and poison hemlock!";
-    printDialogue(dialogue, width);
-
-    system("clear");
-    map->printMap(player.getXCoord(), player.getYCoord());
-    dialogue = "Remember, hemlock's stems are red with the blood of Socrates.";
-    printDialogue(dialogue, width);
-
+    for (int i = 0; i < 6; ++i) {
+        advanceDialouge(speech[i], map, player);
+    }
 }
 
-
-
-
-
+/*********************************************************************
+ * Advances the dialogue without changing anything else
+ * @param dialogue is the dialogue being printed out
+ * @param map is the map that is displayed with the dialogue
+ * @param player is the player
+*********************************************************************/
+void GamePlay::advanceDialouge(string dialogue, Map *map, Player player) {
+    int width = map->getBoardSizeX() - 2;
+    system("clear");
+    map->printMap(player.getXCoord(), player.getYCoord());
+    printDialogue(dialogue, width);
+}

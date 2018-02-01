@@ -37,6 +37,7 @@ public:
 
     void printEndingDialogue(Map *map, Player player);
 
+    void advanceDialouge(string string,Map *map, Player player);
 
 };
 
