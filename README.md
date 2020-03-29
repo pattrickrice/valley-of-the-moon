@@ -27,7 +27,7 @@ make
 
 ## Screenshots
 
-<a href="https://www.youtube.com/watch?time_continue=129&v=0XQPWDwvvvU"><img
+<a href="https://www.youtube.com/watch?v=0XQPWDwvvvU"><img
 src="screenshots/youtube.png" width="400" /></a> 
 
 <img src="screenshots/1.png" width="400" />
